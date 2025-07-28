@@ -16,6 +16,7 @@ const App = () => {
   const [selectedTab, setSelectedTab] = useState('후기');
   const [feedbackText, setFeedbackText] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
+  const [isHeartLiked, setIsHeartLiked] = useState(false);
 
   const serviceOptions = [
     { id: 1, text: '직원이 친절해요', count: 18, selected: true },
@@ -70,6 +71,10 @@ const App = () => {
     );
   };
 
+  const toggleHeart = () => {
+    setIsHeartLiked(prev => !prev);
+  };
+
   const renderTagButton = (option) => (
     <TouchableOpacity
       key={option.id}
@@ -95,14 +100,29 @@ const App = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity>
-          <Icon name="arrow-back" size={24} color="#000" />
+           <Image
+            source={require('./src/back.png')}
+            style={styles.back}
+            resizeMode="cover"
+          />
         </TouchableOpacity>
         <View style={styles.headerIcons}>
-          <TouchableOpacity style={styles.headerIcon}>
-            <Icon name="favorite-border" size={24} color="#000" />
+          <TouchableOpacity style={styles.headerIcon} onPress={toggleHeart}>
+             <Image
+            source={require('./src/heart.png')}
+            style={[
+              styles.heart,
+              { tintColor: isHeartLiked ? '#ff4444' : '#666' }
+            ]}
+            resizeMode="cover"
+          />
           </TouchableOpacity>
           <TouchableOpacity style={styles.headerIcon}>
-            <Icon name="search" size={24} color="#000" />
+            <Image
+            source={require('./src/search.png')}
+            style={styles.search}
+            resizeMode="cover"
+          />
           </TouchableOpacity>
         </View>
       </View>
@@ -111,7 +131,7 @@ const App = () => {
         {/* Event Poster */}
         <View style={styles.posterContainer}>
           <Image
-            source={{ uri: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Pick_It-SxHATaia494ygno0wb0wfjvgBaz4nC.png' }}
+            source={require('./src/poster1.png')}
             style={styles.posterImage}
             resizeMode="cover"
           />
@@ -123,12 +143,18 @@ const App = () => {
           <Text style={styles.eventDate}>25.05.30 - 25.07.27</Text>
           
           <View style={styles.infoRow}>
-            <Icon name="location-on" size={16} color="#ff4444" />
+            <Image
+            source={require('./src/pin.png')}
+            style={styles.pin}
+            resizeMode="cover" />
             <Text style={styles.infoText}>서울 마포구 와우산로35길 13 오브젝트 서교</Text>
           </View>
           
           <View style={styles.infoRow}>
-            <Icon name="access-time" size={16} color="#ff4444" />
+            <Image
+            source={require('./src/time.png')}
+            style={styles.timeicon}
+            resizeMode="cover" />
             <Text style={styles.infoText}>월~일 : 11:00 - 21:00</Text>
           </View>
 
@@ -141,19 +167,64 @@ const App = () => {
           </View>
         </View>
 
-        {/* Store Introduction */}
+        {/* Store Introduction - Enhanced Scrollable Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>팝업스토어 소개</Text>
-          <Text style={styles.joinText}>[ Join Us! ] 퀵스카우트 대원 모집!🏕️</Text>
-          <Text style={styles.descriptionText}>
-            [ 오브젝트 서교/ 에디트 : Marshville Quokscout 🏕️ ]{'\n'}
-            오브젝트가 마쉬빌 퀵스카우트 캠핑장으로 변신합니다!{'\n\n'}
-            특히 이번 전시는 서울 서교점과 부산 에디트점까지{'\n'}
-            퀵스카우트의 베이스캠프로 꾸며져,{'\n'}
-            다양한 체험형 전시 공간으로 가득 채워질 예정입니다
-          </Text>
+          <View style={styles.introductionBox}>
+            <ScrollView 
+              style={styles.introductionScrollView} 
+              showsVerticalScrollIndicator={true}
+              persistentScrollbar={true}
+              nestedScrollEnabled={true}
+              bounces={true}
+              scrollEventThrottle={16}
+            >
+              <Text style={styles.joinText}>[ Join Us! ] 퀵스카우트 대원 모집!🏕️</Text>
+              <Text style={styles.descriptionText}>
+                [ 오브젝트 서교/ 에디트 : Marshville Quokscout 🏕️ ]{'\n'}
+                오브젝트가 마쉬빌 퀵스카우트 캠핑장으로 변신합니다!{'\n\n'}
+                특히 이번 전시는 서울 서교점과 부산 에디트점까지{'\n'}
+                퀵스카우트의 베이스캠프로 꾸며져,{'\n'}
+                다양한 체험형 전시 공간으로 가득 채워질 예정입니다{'\n\n'}
+                캠핑의 즐거움과 퀵스카우트의 매력을 동시에 느낄 수 있는{'\n'}
+                특별한 공간으로 여러분을 초대합니다.{'\n\n'}
+                다양한 포토존과 체험 공간이 마련되어 있어{'\n'}
+                방문객들에게 잊지 못할 추억을 선사할 것입니다.{'\n\n'}
+                이번 기회를 놓치지 마시고 꼭 방문해보세요!{'\n\n'}
+                
+                🏕️ 캠핑 체험존{'\n'}
+                실제 캠핑 장비들을 체험해볼 수 있는 공간이 마련되어 있습니다.{'\n'}
+                텐트 안에서 사진을 찍거나, 캠핑 용품들을 직접 만져볼 수 있어요.{'\n\n'}
+                
+                📸 포토존{'\n'}
+                퀵스카우트 캐릭터들과 함께 사진을 찍을 수 있는{'\n'}
+                다양한 포토존이 곳곳에 설치되어 있습니다.{'\n\n'}
+                
+                🛍️ 굿즈샵{'\n'}
+                한정판 굿즈부터 일반 굿즈까지{'\n'}
+                다양한 퀵스카우트 상품들을 만나보실 수 있습니다.{'\n\n'}
+                
+                ⏰ 운영시간 안내{'\n'}
+                월요일 - 일요일: 11:00 - 21:00{'\n'}
+                (입장 마감: 20:30){'\n\n'}
+                
+                💡 방문 팁{'\n'}
+                - 평일 오전 시간대가 가장 한적합니다{'\n'}
+                - 주말에는 대기시간이 있을 수 있으니 여유시간을 두고 방문하세요{'\n'}
+                - 한정판 굿즈는 조기 품절될 수 있습니다{'\n'}
+                - 현금과 카드 모두 사용 가능합니다{'\n\n'}
+                
+                🚇 교통편 안내{'\n'}
+                지하철 6호선 상수역 1번 출구에서 도보 5분{'\n'}
+                지하철 2호선 홍익대입구역 9번 출구에서 도보 10분{'\n\n'}
+                
+                여러분의 방문을 기다리고 있겠습니다! 🎉
+              </Text>
+            </ScrollView>
+          </View>
         </View>
 
+        {/* Rest of the component remains the same */}
         {/* Feedback Section */}
         <View style={styles.section}>
           <View style={styles.feedbackHeader}>

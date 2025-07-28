@@ -23,6 +23,19 @@ const styles = StyleSheet.create({
   headerIcon: {
     marginLeft: 16,
   },
+  back: {
+    width: 19,
+    height:19,
+  },
+  heart: {
+    width: 28,
+    height: 28,
+  },
+  search: {
+    width: 25,
+    height: 25,
+    marginTop:3,
+  },
   scrollView: {
     flex: 1,
   },
@@ -33,7 +46,7 @@ const styles = StyleSheet.create({
   posterImage: {
     width: '100%',
     height: 400,
-    borderRadius: 12,
+    borderRadius: 20,
   },
   eventInfo: {
     paddingHorizontal: 16,
@@ -61,6 +74,16 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     flex: 1,
   },
+  pin:{
+    width: 25,
+    height:25,
+  },
+  timeicon:{
+    width: 15,
+    height: 15,
+    marginLeft: 5,
+    marginRight: 5,
+  },
   tagContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -76,12 +99,12 @@ const styles = StyleSheet.create({
   },
   eventTagText: {
     fontSize: 12,
-    color: '#666',
+    color: 'black',
   },
   section: {
     paddingHorizontal: 16,
     paddingVertical: 16,
-    borderTopWidth: 8,
+    borderTopWidth: 2,
     borderTopColor: '#f8f8f8',
   },
   sectionTitle: {
@@ -90,10 +113,25 @@ const styles = StyleSheet.create({
     color: '#000',
     marginBottom: 12,
   },
+  // New styles for the introduction box
+  introductionBox: {
+    width: 360,
+    height: 420,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 12,
+    padding: 16,
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  introductionScrollView: {
+    flex: 1,
+  },
   joinText: {
     fontSize: 14,
     color: '#333',
     marginBottom: 8,
+    fontWeight: 'bold',
   },
   descriptionText: {
     fontSize: 14,
