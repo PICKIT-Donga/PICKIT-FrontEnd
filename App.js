@@ -1,21 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { View, Text, Image, TouchableOpacity, ScrollView, FlatList, SafeAreaView, StatusBar, Alert } from "react-native"
+import { useState } from "react"
+import { View, Text, Image, TouchableOpacity, FlatList, SafeAreaView, StatusBar, Alert } from "react-native"
 import Icon from "react-native-vector-icons/Feather"
 import { styles } from "./styles.js"
 
 // 샘플 데이터
-const categories = [
-  { id: "trending", name: "지금 뜨는" },
-  { id: "exhibition", name: "전시" },
-  { id: "fashion", name: "패션" },
-  { id: "food", name: "푸드" },
-  { id: "cafe", name: "카페" },
-  { id: "experience", name: "체험형" },
-  { id: "new", name: "신규" },
-]
-
 const samplePopups = [
   {
     id: "1",
@@ -78,7 +68,7 @@ const PickItHeader = ({ onNotificationPress, onSearchPress }) => {
   return (
     <View style={styles.header}>
       <View style={styles.headerContent}>
-        <Text style={styles.logo}>PICK IT</Text>
+        <Image source={require("./src/pickitlogo.png")} style={styles.logoImage} resizeMode="contain" />
         <View style={styles.headerActions}>
           <TouchableOpacity style={styles.iconButton} onPress={onNotificationPress} activeOpacity={0.7}>
             <Icon name="bell" size={24} color="#3a3a3a" />
@@ -88,36 +78,6 @@ const PickItHeader = ({ onNotificationPress, onSearchPress }) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
-  )
-}
-
-// 카테고리 탭 컴포넌트
-const CategoryTabs = ({ categories, selectedCategory, onCategoryChange }) => {
-  return (
-    <View style={styles.categoryTabs}>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.categoryScrollView}>
-        {categories.map((category) => (
-          <TouchableOpacity
-            key={category.id}
-            style={[
-              styles.categoryButton,
-              selectedCategory === category.id ? styles.categoryButtonActive : styles.categoryButtonInactive,
-            ]}
-            onPress={() => onCategoryChange(category.id)}
-            activeOpacity={0.7}
-          >
-            <Text
-              style={[
-                styles.categoryText,
-                selectedCategory === category.id ? styles.categoryTextActive : styles.categoryTextInactive,
-              ]}
-            >
-              {category.name}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
     </View>
   )
 }
@@ -196,19 +156,7 @@ const BottomNavigation = ({ activeTab, onTabChange }) => {
 // 메인 앱 컴포넌트
 const App = () => {
   const [popups, setPopups] = useState(samplePopups)
-  const [filteredPopups, setFilteredPopups] = useState(samplePopups)
-  const [selectedCategory, setSelectedCategory] = useState("exhibition")
   const [activeTab, setActiveTab] = useState("home")
-
-  // 카테고리 필터링
-  useEffect(() => {
-    if (selectedCategory === "trending") {
-      setFilteredPopups(popups)
-    } else {
-      const filtered = popups.filter((popup) => popup.category === selectedCategory)
-      setFilteredPopups(filtered)
-    }
-  }, [popups, selectedCategory])
 
   // 이벤트 핸들러들
   const handleNotificationPress = () => {
@@ -217,10 +165,6 @@ const App = () => {
 
   const handleSearchPress = () => {
     Alert.alert("검색", "검색 기능이 클릭되었습니다.")
-  }
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category)
   }
 
   const handleDetailPress = (popup) => {
@@ -232,11 +176,6 @@ const App = () => {
     Alert.alert("탭 변경", `${tab} 탭으로 이동합니다.`)
   }
 
-  const getCategoryTitle = () => {
-    const category = categories.find((cat) => cat.id === selectedCategory)
-    return category ? category.name : "전시"
-  }
-
   const renderPopupCard = ({ item, index }) => <PopupCard popup={item} onDetailPress={handleDetailPress} />
 
   return (
@@ -246,24 +185,17 @@ const App = () => {
       {/* 헤더 */}
       <PickItHeader onNotificationPress={handleNotificationPress} onSearchPress={handleSearchPress} />
 
-      {/* 카테고리 탭 */}
-      <CategoryTabs
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryChange={handleCategoryChange}
-      />
-
       {/* 메인 컨텐츠 */}
       <View style={styles.mainContent}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.sectionTitle}>
-            답답자 픽! 인기 <Text style={styles.highlightText}>{getCategoryTitle()}</Text> 팝업
+            답답자 픽! 인기 <Text style={styles.highlightText}>팝업</Text>
           </Text>
         </View>
 
-        {filteredPopups.length > 0 ? (
+        {popups.length > 0 ? (
           <FlatList
-            data={filteredPopups}
+            data={popups}
             renderItem={renderPopupCard}
             keyExtractor={(item) => item.id}
             numColumns={2}

@@ -29,11 +29,9 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: 44,
   },
-  logo: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#ff2e2a",
-    letterSpacing: 1,
+  logoImage: {
+    width: 120,
+    height: 32,
   },
   headerActions: {
     flexDirection: "row",
@@ -46,45 +44,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginLeft: 8,
-  },
-
-  // 카테고리 탭 스타일
-  categoryTabs: {
-    backgroundColor: "white",
-    borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
-  },
-  categoryScrollView: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  categoryButton: {
-    minWidth: 60,
-    minHeight: 44,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 22,
-    marginRight: 12,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  categoryButtonActive: {
-    backgroundColor: "#1a1a1a",
-  },
-  categoryButtonInactive: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: "#dadada",
-  },
-  categoryText: {
-    fontSize: 14,
-    fontWeight: "500",
-  },
-  categoryTextActive: {
-    color: "white",
-  },
-  categoryTextInactive: {
-    color: "#787878",
   },
 
   // 메인 컨텐츠 스타일
