@@ -13,7 +13,7 @@ const samplePopups = [
     location: "서울 강남구",
     startDate: "2025-07-30",
     endDate: "2025-08-30",
-    image: "https://picsum.photos/400/300?random=1",
+    image: "./poster/poster1.png",
     category: "exhibition",
   },
   {
@@ -22,7 +22,7 @@ const samplePopups = [
     location: "서울 중구",
     startDate: "2025-07-19",
     endDate: "2025-11-09",
-    image: "https://picsum.photos/400/300?random=2",
+    image: "./poster/poster1.png",
     category: "exhibition",
   },
   {
@@ -31,7 +31,7 @@ const samplePopups = [
     location: "서울 서초구",
     startDate: "2025-05-30",
     endDate: "2025-07-27",
-    image: "https://picsum.photos/400/300?random=3",
+    image: "./poster/poster1.png",
     category: "exhibition",
   },
   {
@@ -40,7 +40,7 @@ const samplePopups = [
     location: "서울 중구구",
     startDate: "2024-11-21",
     endDate: "2025-08-17",
-    image: "https://picsum.photos/400/300?random=4",
+    image: "./poster/poster1.png",
     category: "exhibition",
   },
   {
@@ -49,7 +49,7 @@ const samplePopups = [
     location: "서울 강남구",
     startDate: "2025-01-15",
     endDate: "2025-02-29",
-    image: "https://picsum.photos/400/300?random=5",
+    image: "./poster/poster1.png",
     category: "trending",
   },
   {
@@ -58,7 +58,7 @@ const samplePopups = [
     location: "서울 중구",
     startDate: "2025-02-10",
     endDate: "2025-02-20",
-    image: "https://picsum.photos/400/300?random=6",
+    image: "./poster/poster1.png",
     category: "fashion",
   },
 ]
@@ -71,10 +71,10 @@ const PickItHeader = ({ onNotificationPress, onSearchPress }) => {
         <Image source={require("./src/pickitlogo.png")} style={styles.logoImage} resizeMode="contain" />
         <View style={styles.headerActions}>
           <TouchableOpacity style={styles.iconButton} onPress={onNotificationPress} activeOpacity={0.7}>
-            <Icon name="bell" size={24} color="#3a3a3a" />
+            <Image source={require("./src/bell.png")} style={styles.bell} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton} onPress={onSearchPress} activeOpacity={0.7}>
-            <Icon name="search" size={24} color="#3a3a3a" />
+            <Image source={require("./src/search.png")} style={styles.search} />
           </TouchableOpacity>
         </View>
       </View>
@@ -95,24 +95,29 @@ const PopupCard = ({ popup, onDetailPress }) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.card}>
-        <Image source={{ uri: popup.image }} style={styles.cardImage} resizeMode="cover" />
-
-        <TouchableOpacity style={styles.cardButton} onPress={() => onDetailPress(popup)} activeOpacity={0.7}>
-          <Text style={styles.cardButtonText}>자세히 보기</Text>
-        </TouchableOpacity>
+        {/* 1. 사진 */}
+        <Image source={require("./poster/poster1.png")} style={styles.cardImage} resizeMode="cover" />
 
         <View style={styles.cardContent}>
-          <Text style={styles.cardTitle} numberOfLines={2}>
+          {/* 2. Detail 버튼 */}
+          <TouchableOpacity style={styles.cardButton} onPress={() => onDetailPress(popup)} activeOpacity={0.7}>
+            <Image source={require("./src/detail.png")} style={styles.cardButtonImage} resizeMode="contain" />
+          </TouchableOpacity>
+
+          {/* 3. 제목 - 한 줄만 표시하고 말줄임표 처리 */}
+          <Text style={styles.cardTitle} numberOfLines={1} ellipsizeMode="tail">
             {popup.title}
           </Text>
 
+          {/* 4. 위치 */}
           <View style={styles.cardLocation}>
-            <Icon name="map-pin" size={12} color="#787878" />
+            <Image source={require("./src/pin.png")} style={styles.pin} />
             <Text style={styles.cardLocationText} numberOfLines={1}>
               {popup.location}
             </Text>
           </View>
 
+          {/* 5. 날짜 */}
           <Text style={styles.cardDate}>
             {formatDate(popup.startDate)} - {formatDate(popup.endDate)}
           </Text>
@@ -125,10 +130,10 @@ const PopupCard = ({ popup, onDetailPress }) => {
 // 하단 네비게이션 컴포넌트
 const BottomNavigation = ({ activeTab, onTabChange }) => {
   const tabs = [
-    { id: "home", name: "홈", icon: "home" },
-    { id: "map", name: "지도", icon: "map" },
-    { id: "calendar", name: "캘린더", icon: "calendar" },
-    { id: "profile", name: "마이", icon: "user" },
+    { id: "home", name: "홈", icon: require("./src/home.png") },
+    { id: "map", name: "지도", icon: require("./src/map.png") },
+    { id: "calendar", name: "캘린더", icon: require("./src/calender.png") },
+    { id: "profile", name: "마이", icon: require("./src/my.png") },
   ]
 
   return (
@@ -143,7 +148,18 @@ const BottomNavigation = ({ activeTab, onTabChange }) => {
               onPress={() => onTabChange(tab.id)}
               activeOpacity={0.7}
             >
-              <Icon name={tab.icon} size={24} color={isActive ? "#ff2e2a" : "#787878"} style={styles.tabIcon} />
+              <Image
+                source={tab.icon}
+                style={[
+                  styles.tabIcon,
+                  {
+                    width: 24,
+                    height: 24,
+                    tintColor: isActive ? "#ff2e2a" : "#787878",
+                  },
+                ]}
+                resizeMode="contain"
+              />
               <Text style={[styles.tabText, isActive ? styles.tabActive : styles.tabInactive]}>{tab.name}</Text>
             </TouchableOpacity>
           )
@@ -189,7 +205,7 @@ const App = () => {
       <View style={styles.mainContent}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.sectionTitle}>
-            답답자 픽! 인기 <Text style={styles.highlightText}>팝업</Text>
+            <Text style={styles.highlightText}>놓치면 손해!</Text> 꼭 가봐야하는 팝업
           </Text>
         </View>
 
