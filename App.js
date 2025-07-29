@@ -68,13 +68,13 @@ const PickItHeader = ({ onNotificationPress, onSearchPress }) => {
   return (
     <View style={styles.header}>
       <View style={styles.headerContent}>
-        <Image source={require("./src/pickitlogo.png")} style={styles.logoImage} resizeMode="contain" />
+        <Image source={require("./src/common/pickitlogo.png")} style={styles.logoImage} resizeMode="contain" />
         <View style={styles.headerActions}>
           <TouchableOpacity style={styles.iconButton} onPress={onNotificationPress} activeOpacity={0.7}>
-            <Image source={require("./src/bell.png")} style={styles.bell} />
+            <Image source={require("./src/common/alramicon.png")} style={styles.bell} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton} onPress={onSearchPress} activeOpacity={0.7}>
-            <Image source={require("./src/search.png")} style={styles.search} />
+            <Image source={require("./src/common/searchicon.png")} style={styles.search} />
           </TouchableOpacity>
         </View>
       </View>
@@ -96,12 +96,12 @@ const PopupCard = ({ popup, onDetailPress }) => {
     <View style={styles.cardContainer}>
       <View style={styles.card}>
         {/* 1. 사진 */}
-        <Image source={require("./poster/poster1.png")} style={styles.cardImage} resizeMode="cover" />
+        <Image source={require("./src/homesrc/poster1.png")} style={styles.cardImage} resizeMode="cover" />
 
         <View style={styles.cardContent}>
           {/* 2. Detail 버튼 */}
           <TouchableOpacity style={styles.cardButton} onPress={() => onDetailPress(popup)} activeOpacity={0.7}>
-            <Image source={require("./src/detail.png")} style={styles.cardButtonImage} resizeMode="contain" />
+            <Image source={require("./src/homesrc/detailbutton.png")} style={styles.cardButtonImage} resizeMode="contain" />
           </TouchableOpacity>
 
           {/* 3. 제목 - 한 줄만 표시하고 말줄임표 처리 */}
@@ -111,7 +111,7 @@ const PopupCard = ({ popup, onDetailPress }) => {
 
           {/* 4. 위치 */}
           <View style={styles.cardLocation}>
-            <Image source={require("./src/pin.png")} style={styles.pin} />
+            <Image source={require("./src/common/pickitpin.png")} style={styles.pin} />
             <Text style={styles.cardLocationText} numberOfLines={1}>
               {popup.location}
             </Text>
@@ -130,10 +130,10 @@ const PopupCard = ({ popup, onDetailPress }) => {
 // 하단 네비게이션 컴포넌트
 const BottomNavigation = ({ activeTab, onTabChange }) => {
   const tabs = [
-    { id: "home", name: "홈", icon: require("./src/home.png") },
-    { id: "map", name: "지도", icon: require("./src/map.png") },
-    { id: "calendar", name: "캘린더", icon: require("./src/calender.png") },
-    { id: "profile", name: "마이", icon: require("./src/my.png") },
+    { id: "home", name: "홈", icon: require("./src/common/home.png") },
+    { id: "map", name: "지도", icon: require("./src/common/map.png") },
+    { id: "calendar", name: "캘린더", icon: require("./src/common/calendar.png") },
+    { id: "profile", name: "마이", icon: require("./src/common/my.png") },
   ]
 
   return (

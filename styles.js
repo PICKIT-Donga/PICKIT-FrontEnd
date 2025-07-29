@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
   },
   iconButton: {
-    marginLeft: 15,
+    marginLeft: 12,
   },
   bell: {
     width: 22,
