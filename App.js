@@ -27,31 +27,31 @@ const regions = [
 ]
 
 const seoulDistricts = [
-  { id: "jongno", name: "종로구" },
-  { id: "jung", name: "중구" },
-  { id: "yongsan", name: "용산구" },
-  { id: "seongdong", name: "성동구" },
-  { id: "gwangjin", name: "광진구" },
-  { id: "dongdaemun", name: "동대문구" },
-  { id: "jungnang", name: "중랑구" },
-  { id: "seongbuk", name: "성북구" },
-  { id: "gangbuk", name: "강북구" },
-  { id: "dobong", name: "도봉구" },
-  { id: "nowon", name: "노원구" },
-  { id: "eunpyeong", name: "은평구" },
-  { id: "seodaemun", name: "서대문구" },
-  { id: "mapo", name: "마포구" },
-  { id: "yangcheon", name: "양천구" },
-  { id: "gangseo", name: "강서구" },
-  { id: "guro", name: "구로구" },
-  { id: "geumcheon", name: "금천구" },
-  { id: "yeongdeungpo", name: "영등포구" },
-  { id: "dongjak", name: "동작구" },
-  { id: "gwanak", name: "관악구" },
-  { id: "seocho", name: "서초구" },
-  { id: "gangnam", name: "강남구" },
-  { id: "songpa", name: "송파구" },
-  { id: "gangdong", name: "강동구" },
+{ id: "gangnam", name: "강남구" },
+{ id: "gangdong", name: "강동구" },
+{ id: "gangbuk", name: "강북구" },
+{ id: "gangseo", name: "강서구" },
+{ id: "gwanak", name: "관악구" },
+{ id: "gwangjin", name: "광진구" },
+{ id: "guro", name: "구로구" },
+{ id: "geumcheon", name: "금천구" },
+{ id: "nowon", name: "노원구" },
+{ id: "dobong", name: "도봉구" },
+{ id: "dongjak", name: "동작구" },
+{ id: "dongdaemun", name: "동대문구" },
+{ id: "mapo", name: "마포구" },
+{ id: "seodaemun", name: "서대문구" },
+{ id: "seocho", name: "서초구" },
+{ id: "seongdong", name: "성동구" },
+{ id: "seongbuk", name: "성북구" },
+{ id: "songpa", name: "송파구" },
+{ id: "yangcheon", name: "양천구" },
+{ id: "yeongdeungpo", name: "영등포구" },
+{ id: "yongsan", name: "용산구" },
+{ id: "eunpyeong", name: "은평구" },
+{ id: "jongno", name: "종로구" },
+{ id: "jungnang", name: "중랑구" },
+{ id: "jung", name: "중구" },
 ]
 
 const popupStores = [
@@ -125,10 +125,31 @@ const popupStores = [
 
 // 구별 지도 이미지
 const districtMapImages = {
-  seongdong: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/seongdong-map.png",
-  gangnam: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gangnam-map.png",
-  jongno: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/jongno-map.png",
-  // 필요에 따라 더 많은 구별 이미지 추가
+  gangnam: require("./src/locationmapimg/seoul/Gangnam-gu.png"),
+  gangdong: require("./src/locationmapimg/seoul/Gangdong-gu.png"),
+  gangbuk: require("./src/locationmapimg/seoul/Gangbuk-gu.png"),
+  gangseo: require("./src/locationmapimg/seoul/Gangseo-gu.png"),
+  gwanak: require("./src/locationmapimg/seoul/Gwanak-gu.png"),
+  gwangjin: require("./src/locationmapimg/seoul/Gwangjin-gu.png"),
+  guro: require("./src/locationmapimg/seoul/Guro-gu.png"),
+  geumcheon: require("./src/locationmapimg/seoul/Geumcheon-gu.png"),
+  nowon: require("./src/locationmapimg/seoul/Nowon-gu.png"),
+  dobong: require("./src/locationmapimg/seoul/Dobong-gu.png"),
+  dongjak: require("./src/locationmapimg/seoul/Dongjak-gu.png"),
+  dongdaemun: require("./src/locationmapimg/seoul/Dongdaemun-gu.png"),
+  mapo: require("./src/locationmapimg/seoul/Mapo-gu.png"),
+  seodaemun: require("./src/locationmapimg/seoul/Seodaemun-gu.png"),
+  seocho: require("./src/locationmapimg/seoul/Seocho-gu.png"),
+  seongdong: require("./src/locationmapimg/seoul/Seongdong-gu.png"),
+  seongbuk: require("./src/locationmapimg/seoul/Seongbuk-gu.png"),
+  songpa: require("./src/locationmapimg/seoul/Songpa-gu.png"),
+  yangcheon: require("./src/locationmapimg/seoul/Yangcheon-gu.png"),
+  yeongdeungpo: require("./src/locationmapimg/seoul/Yeongdeungpo-gu.png"),
+  yongsan: require("./src/locationmapimg/seoul/Yongsan-gu.png"),
+  eunpyeong: require("./src/locationmapimg/seoul/Eunpyeong-gu.png"),
+  jongno: require("./src/locationmapimg/seoul/Jongno-gu.png"),
+  jungnang: require("./src/locationmapimg/seoul/Jungnang-gu.png"),
+  jung: require("./src/locationmapimg/seoul/Jung-gu.png"),
 }
 
 // 간단한 아이콘 컴포넌트들
@@ -308,7 +329,7 @@ const MapScreen = () => {
       return districtMapImages[selectedDistrict]
     }
     if (showSeoulMap) {
-      return "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Pick_It-jq7f69TnVS9WLV4fqz48NQcpwRAqCi.png"
+      return require("./src/locationmapimg/seoulmap.png")
     }
     // 전체 지도는 로컬 한국 지도 이미지 사용
     return require("./src/locationmapimg/koreamap.png")
@@ -317,7 +338,7 @@ const MapScreen = () => {
   const getSelectedDistrictName = () => {
     if (selectedDistrict) {
       const district = seoulDistricts.find((d) => d.id === selectedDistrict)
-      return district ? district.name : "지역 선��"
+      return district ? district.name : "지역 선택 "
     }
     return "지역(구) 선택"
   }

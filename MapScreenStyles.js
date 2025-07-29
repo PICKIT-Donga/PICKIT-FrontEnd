@@ -5,7 +5,7 @@ const { width } = Dimensions.get("window")
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7f7f7",
+    ackgroundColor: "#fff",
   },
 
   // 필터 스타일
