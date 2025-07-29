@@ -132,7 +132,7 @@ const districtMapImages = {
 // Simple Icon Components
 const BellIcon = ({ notificationCount }) => (
   <TouchableOpacity onPress={() => console.log("Notification Pressed")} style={styles.iconContainer}>
-    <Image source={require("./src/hightap/alramicon.png")} style={styles.iconImage} />
+    <Image source={require("./src/common/alramicon.png")} style={styles.iconImage} />
     {notificationCount > 0 && (
       <View style={styles.notificationBadge}>
         <Text style={styles.notificationBadgeText}>{notificationCount}</Text>
@@ -143,7 +143,7 @@ const BellIcon = ({ notificationCount }) => (
 
 const SearchIcon = ({ handleSearchPress }) => (
   <TouchableOpacity onPress={handleSearchPress} style={styles.iconContainer}>
-    <Image source={require("./src/hightap/searchicon.png")} style={styles.iconImage} />
+    <Image source={require("./src/common/searchicon.png")} style={styles.iconImage} />
   </TouchableOpacity>
 )
 
@@ -510,7 +510,7 @@ const MapScreen = () => {
       <View style={styles.bottomNavigation}>
         <TouchableOpacity style={styles.navItem} onPress={() => handleTabPress("home")}>
           <Image
-            source={activeTab === "home" ? require("./src/lowtap/homered.png") : require("./src/lowtap/home.png")}
+            source={activeTab === "home" ? require("./src/common/home.png") : require("./src/common/home.png")}
             style={styles.navIconImage}
           />
           <Text style={[styles.navText, activeTab === "home" && styles.navTextActive]}>홈</Text>
@@ -527,7 +527,7 @@ const MapScreen = () => {
         <TouchableOpacity style={styles.navItem} onPress={() => handleTabPress("calendar")}>
           <Image
             source={
-              activeTab === "calendar" ? require("./src/lowtap/calendar.png") : require("./src/lowtap/calendar.png")
+              activeTab === "calendar" ? require("./src/common/calendar.png") : require("./src/common/calendar.png")
             }
             style={styles.navIconImage}
           />
@@ -536,7 +536,7 @@ const MapScreen = () => {
 
         <TouchableOpacity style={styles.navItem} onPress={() => handleTabPress("my")}>
           <Image
-            source={activeTab === "my" ? require("./src/lowtap/my.png") : require("./src/lowtap/my.png")}
+            source={activeTab === "my" ? require("./src/common/my.png") : require("./src/lowtap/my.png")}
             style={styles.navIconImage}
           />
           <Text style={[styles.navText, activeTab === "my" && styles.navTextActive]}>마이</Text>
