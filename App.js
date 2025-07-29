@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import { View, Text, Image, TouchableOpacity, FlatList, SafeAreaView, StatusBar, Alert } from "react-native"
-import Icon from "react-native-vector-icons/Feather"
 import { styles } from "./styles.js"
+import PickItHeader from "./components/PickItHeader.js"
+import BottomNavigation from "./components/BottomNavigation.js"
 
 // 샘플 데이터
 const samplePopups = [
@@ -63,25 +64,6 @@ const samplePopups = [
   },
 ]
 
-// 헤더 컴포넌트
-const PickItHeader = ({ onNotificationPress, onSearchPress }) => {
-  return (
-    <View style={styles.header}>
-      <View style={styles.headerContent}>
-        <Image source={require("./src/common/pickitlogo.png")} style={styles.logoImage} resizeMode="contain" />
-        <View style={styles.headerActions}>
-          <TouchableOpacity style={styles.iconButton} onPress={onNotificationPress} activeOpacity={0.7}>
-            <Image source={require("./src/common/alramicon.png")} style={styles.bell} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconButton} onPress={onSearchPress} activeOpacity={0.7}>
-            <Image source={require("./src/common/searchicon.png")} style={styles.search} />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
-  )
-}
-
 // 팝업 카드 컴포넌트
 const PopupCard = ({ popup, onDetailPress }) => {
   const formatDate = (dateString) => {
@@ -127,54 +109,17 @@ const PopupCard = ({ popup, onDetailPress }) => {
   )
 }
 
-// 하단 네비게이션 컴포넌트
-const BottomNavigation = ({ activeTab, onTabChange }) => {
-  const tabs = [
-    { id: "home", name: "홈", icon: require("./src/common/home.png") },
-    { id: "map", name: "지도", icon: require("./src/common/map.png") },
-    { id: "calendar", name: "캘린더", icon: require("./src/common/calendar.png") },
-    { id: "profile", name: "마이", icon: require("./src/common/my.png") },
-  ]
-
-  return (
-    <View style={styles.bottomNavigation}>
-      <View style={styles.bottomNavContent}>
-        {tabs.map((tab) => {
-          const isActive = activeTab === tab.id
-          return (
-            <TouchableOpacity
-              key={tab.id}
-              style={styles.tabButton}
-              onPress={() => onTabChange(tab.id)}
-              activeOpacity={0.7}
-            >
-              <Image
-                source={tab.icon}
-                style={[
-                  styles.tabIcon,
-                  {
-                    width: 24,
-                    height: 24,
-                    tintColor: isActive ? "#ff2e2a" : "#787878",
-                  },
-                ]}
-                resizeMode="contain"
-              />
-              <Text style={[styles.tabText, isActive ? styles.tabActive : styles.tabInactive]}>{tab.name}</Text>
-            </TouchableOpacity>
-          )
-        })}
-      </View>
-    </View>
-  )
-}
-
 // 메인 앱 컴포넌트
 const App = () => {
   const [popups, setPopups] = useState(samplePopups)
   const [activeTab, setActiveTab] = useState("home")
 
   // 이벤트 핸들러들
+  const handleLogoPress = () => {
+    setActiveTab("home")
+    Alert.alert("홈", "홈 화면으로 이동합니다.")
+  }
+
   const handleNotificationPress = () => {
     Alert.alert("알림", "알림 기능이 클릭되었습니다.")
   }
@@ -189,7 +134,11 @@ const App = () => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab)
-    Alert.alert("탭 변경", `${tab} 탭으로 이동합니다.`)
+    if (tab === "home") {
+      Alert.alert("홈", "홈 화면입니다.")
+    } else {
+      Alert.alert("탭 변경", `${tab} 탭으로 이동합니다.`)
+    }
   }
 
   const renderPopupCard = ({ item, index }) => <PopupCard popup={item} onDetailPress={handleDetailPress} />
@@ -199,7 +148,11 @@ const App = () => {
       <StatusBar barStyle="dark-content" backgroundColor="white" />
 
       {/* 헤더 */}
-      <PickItHeader onNotificationPress={handleNotificationPress} onSearchPress={handleSearchPress} />
+      <PickItHeader 
+        onNotificationPress={handleNotificationPress} 
+        onSearchPress={handleSearchPress}
+        onLogoPress={handleLogoPress}
+      />
 
       {/* 메인 컨텐츠 */}
       <View style={styles.mainContent}>

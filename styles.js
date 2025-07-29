@@ -5,36 +5,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
-  header: {
-    backgroundColor: "#ffff",
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#eee",
-  },
-  headerContent: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  logoImage: {
-    width: 123,
-    height: 22,
-  },
-  headerActions: {
-    flexDirection: "row",
-  },
-  iconButton: {
-    marginLeft: 12,
-  },
-  bell: {
-    width: 22,
-    height: 22,
-  },
-  search: {
-    width: 22,
-    height: 22,
-  },
   mainContent: {
     flex: 1,
     paddingHorizontal: 10,
@@ -101,35 +71,6 @@ export const styles = StyleSheet.create({
   },
   cardDate: {
     fontSize: 12,
-    color: "#787878",
-  },
-  bottomNavigation: {
-    backgroundColor: "#ffff",
-    borderTopWidth: 1,
-    borderTopColor: "#eee",
-    paddingVertical: 10,
-  },
-  bottomNavContent: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  tabButton: {
-    alignItems: "center",
-  },
-  tabIcon: {
-    width: 24,
-    height: 24,
-    marginBottom: 5,
-  },
-  tabText: {
-    fontSize: 12,
-  },
-  tabActive: {
-    color: "#ff2e2a",
-  },
-  tabInactive: {
     color: "#787878",
   },
   row: {
