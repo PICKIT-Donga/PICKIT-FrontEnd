@@ -2,7 +2,9 @@
 
 import { useState } from "react"
 import { View, Text, ScrollView, TouchableOpacity, Image, SafeAreaView, TextInput } from "react-native"
-import styles from "./MapScreenStyles"
+import styles from "./MapScreenStyles.js"
+import BottomNavigation from "./components/BottomNavigation.js"
+import PickItHeader from "./components/Header.js"
 
 const regions = [
   { id: "all", name: "전체", active: true },
@@ -121,32 +123,15 @@ const popupStores = [
   },
 ]
 
-// District map images
+// 구별 지도 이미지
 const districtMapImages = {
   seongdong: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/seongdong-map.png",
   gangnam: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gangnam-map.png",
   jongno: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/jongno-map.png",
-  // Add more district images as needed
+  // 필요에 따라 더 많은 구별 이미지 추가
 }
 
-// Simple Icon Components
-const BellIcon = ({ notificationCount }) => (
-  <TouchableOpacity onPress={() => console.log("Notification Pressed")} style={styles.iconContainer}>
-    <Image source={require("./src/common/alramicon.png")} style={styles.iconImage} />
-    {notificationCount > 0 && (
-      <View style={styles.notificationBadge}>
-        <Text style={styles.notificationBadgeText}>{notificationCount}</Text>
-      </View>
-    )}
-  </TouchableOpacity>
-)
-
-const SearchIcon = ({ handleSearchPress }) => (
-  <TouchableOpacity onPress={handleSearchPress} style={styles.iconContainer}>
-    <Image source={require("./src/common/searchicon.png")} style={styles.iconImage} />
-  </TouchableOpacity>
-)
-
+// 간단한 아이콘 컴포넌트들
 const HeartIcon = ({ filled, onPress }) => (
   <TouchableOpacity onPress={onPress} style={styles.heartButton}>
     <Image source={require("./src/mapicon/favorites.png")} style={styles.heartIconImage} />
@@ -213,6 +198,10 @@ const MapScreen = () => {
     setShowSearch(true)
   }
 
+  const handleLogoPress = () => {
+    console.log("로고 클릭됨")
+  }
+
   const handleCloseNotifications = () => {
     setShowNotifications(false)
   }
@@ -223,7 +212,7 @@ const MapScreen = () => {
   }
 
   const markNotificationAsRead = (notificationId) => {
-    console.log(`Notification ${notificationId} marked as read`)
+    console.log(`알림 ${notificationId} 읽음 처리됨`)
   }
 
   const handleRegionClick = (regionId) => {
@@ -309,9 +298,9 @@ const MapScreen = () => {
     setLikedStores((prev) => (prev.includes(storeId) ? prev.filter((id) => id !== storeId) : [...prev, storeId]))
   }
 
-  const handleTabPress = (tabName) => {
+  const handleTabChange = (tabName) => {
     setActiveTab(tabName)
-    console.log(`${tabName} tab pressed`)
+    console.log(`${tabName} 탭 클릭됨`)
   }
 
   const getMapImage = () => {
@@ -328,23 +317,21 @@ const MapScreen = () => {
   const getSelectedDistrictName = () => {
     if (selectedDistrict) {
       const district = seoulDistricts.find((d) => d.id === selectedDistrict)
-      return district ? district.name : "지역 선택"
+      return district ? district.name : "지역 선��"
     }
     return "지역(구) 선택"
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>지도</Text>
-        <View style={styles.headerIcons}>
-          <BellIcon notificationCount={notificationCount} />
-          <SearchIcon handleSearchPress={handleSearchPress} />
-        </View>
-      </View>
+      {/* 헤더 */}
+      <PickItHeader
+        onNotificationPress={handleNotificationPress}
+        onSearchPress={handleSearchPress}
+        onLogoPress={handleLogoPress}
+      />
 
-      {/* Region Filter */}
+      {/* 지역 필터 */}
       <View style={styles.filterContainer}>
         <ScrollView
           horizontal
@@ -365,7 +352,7 @@ const MapScreen = () => {
         </ScrollView>
       </View>
 
-      {/* Map Section */}
+      {/* 지도 섹션 */}
       <View style={styles.mapContainer}>
         <View style={styles.mapImageContainer}>
           <Image
@@ -376,7 +363,7 @@ const MapScreen = () => {
         </View>
       </View>
 
-      {/* Fixed District Selector Header */}
+      {/* 고정된 구 선택 헤더 */}
       {selectedRegion === "seoul" && (
         <View style={styles.fixedHeader}>
           <TouchableOpacity
@@ -389,7 +376,7 @@ const MapScreen = () => {
         </View>
       )}
 
-      {/* District Dropdown */}
+      {/* 구 드롭다운 */}
       {showDistrictDropdown && selectedRegion === "seoul" && (
         <View style={styles.districtDropdown}>
           <ScrollView style={styles.districtDropdownScroll}>
@@ -406,7 +393,7 @@ const MapScreen = () => {
         </View>
       )}
 
-      {/* Store List */}
+      {/* 스토어 목록 */}
       <ScrollView style={styles.storeListContainer}>
         <View style={styles.storeList}>
           {filteredStores.map((store) => (
@@ -435,7 +422,7 @@ const MapScreen = () => {
         </View>
       </ScrollView>
 
-      {/* Search Modal */}
+      {/* 검색 모달 */}
       {showSearch && (
         <View style={styles.modalOverlay}>
           <View style={styles.searchModal}>
@@ -476,7 +463,7 @@ const MapScreen = () => {
         </View>
       )}
 
-      {/* Notification Modal */}
+      {/* 알림 모달 */}
       {showNotifications && (
         <View style={styles.modalOverlay}>
           <View style={styles.notificationModal}>
@@ -506,42 +493,8 @@ const MapScreen = () => {
         </View>
       )}
 
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNavigation}>
-        <TouchableOpacity style={styles.navItem} onPress={() => handleTabPress("home")}>
-          <Image
-            source={activeTab === "home" ? require("./src/common/home.png") : require("./src/common/home.png")}
-            style={styles.navIconImage}
-          />
-          <Text style={[styles.navText, activeTab === "home" && styles.navTextActive]}>홈</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navItem} onPress={() => handleTabPress("map")}>
-          <Image
-            source={activeTab === "map" ? require("./src/lowtap/mapred.png") : require("./src/lowtap/map.png")}
-            style={styles.navIconImage}
-          />
-          <Text style={[styles.navText, activeTab === "map" && styles.navTextActive]}>지도</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navItem} onPress={() => handleTabPress("calendar")}>
-          <Image
-            source={
-              activeTab === "calendar" ? require("./src/common/calendar.png") : require("./src/common/calendar.png")
-            }
-            style={styles.navIconImage}
-          />
-          <Text style={[styles.navText, activeTab === "calendar" && styles.navTextActive]}>캘린더</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navItem} onPress={() => handleTabPress("my")}>
-          <Image
-            source={activeTab === "my" ? require("./src/common/my.png") : require("./src/lowtap/my.png")}
-            style={styles.navIconImage}
-          />
-          <Text style={[styles.navText, activeTab === "my" && styles.navTextActive]}>마이</Text>
-        </TouchableOpacity>
-      </View>
+      {/* 하단 네비게이션 */}
+      <BottomNavigation activeTab={activeTab} onTabChange={handleTabChange} />
     </SafeAreaView>
   )
 }

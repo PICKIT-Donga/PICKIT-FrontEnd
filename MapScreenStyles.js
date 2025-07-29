@@ -8,42 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7f7f7",
   },
 
-  // Header Styles
-  header: {
-    backgroundColor: "#ffffff",
-    paddingHorizontal: 20,
-    paddingVertical: 8,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  headerTitle: {
-    fontSize: 23,
-    fontWeight: "bold",
-    color: "#1a1a1a",
-  },
-  headerIcons: {
-    flexDirection: "row",
-    gap: 12,
-  },
-
-  // Icon Styles
-  iconContainer: {
-    width: 24,
-    height: 24,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  iconImage: {
-    width: 24,
-    height: 24,
-    resizeMode: "contain",
-  },
-  iconText: {
-    fontSize: 12,
-  },
-
-  // Filter Styles
+  // 필터 스타일
   filterContainer: {
     backgroundColor: "#ffffff",
     paddingVertical: 10,
@@ -75,7 +40,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
 
-  // Map Styles
+  // 지도 스타일
   mapContainer: {
     backgroundColor: "#ffffff",
     borderBottomWidth: 1,
@@ -91,7 +56,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 
-  // Fixed Header Styles
+  // 고정 헤더 스타일
   fixedHeader: {
     backgroundColor: "#ffffff",
     borderBottomWidth: 1,
@@ -99,7 +64,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
 
-  // District Selector Styles
+  // 구 선택기 스타일
   districtSelector: {
     flexDirection: "row",
     alignItems: "center",
@@ -114,7 +79,7 @@ const styles = StyleSheet.create({
     color: "#3a3a3a",
   },
 
-  // District Dropdown Styles
+  // 구 드롭다운 스타일
   districtDropdown: {
     backgroundColor: "#ffffff",
     borderBottomWidth: 1,
@@ -136,7 +101,7 @@ const styles = StyleSheet.create({
     color: "#3a3a3a",
   },
 
-  // Store List Styles
+  // 스토어 목록 스타일
   storeListContainer: {
     flex: 1,
     backgroundColor: "#f7f7f7",
@@ -161,7 +126,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
 
-  // Store Card Styles
+  // 스토어 카드 스타일
   storeItem: {
     paddingVertical: 20,
     paddingHorizontal: 13,
@@ -203,7 +168,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
-  // Heart Icon Styles
+  // 하트 아이콘 스타일
   heartButton: {
     padding: 4,
   },
@@ -219,14 +184,14 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 
-  // Map Pin Icon Image Styles
+  // 지도 핀 아이콘 이미지 스타일
   mapPinIconImage: {
     width: 20,
     height: 20,
     resizeMode: "contain",
   },
 
-  // Location Styles
+  // 위치 스타일
   storeLocationRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -252,56 +217,7 @@ const styles = StyleSheet.create({
     lineHeight: 16,
   },
 
-  // Bottom Navigation Styles
-  bottomNavigation: {
-    backgroundColor: "#ffffff",
-    borderTopWidth: 1,
-    borderTopColor: "#dadada",
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  navItem: {
-    alignItems: "center",
-    paddingVertical: 8,
-    flex: 1,
-  },
-  navIconImage: {
-    width: 24,
-    height: 24,
-    marginBottom: 4,
-    resizeMode: "contain",
-  },
-  navText: {
-    fontSize: 12,
-    color: "#787878",
-  },
-  navTextActive: {
-    color: "#ff2e2a",
-    fontWeight: "500",
-  },
-
-  // Notification Badge Styles
-  notificationBadge: {
-    position: "absolute",
-    top: -2,
-    right: -2,
-    backgroundColor: "#ff2e2a",
-    borderRadius: 8,
-    minWidth: 16,
-    height: 16,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 4,
-  },
-  notificationBadgeText: {
-    fontSize: 10,
-    color: "#ffffff",
-    fontWeight: "bold",
-  },
-
-  // Modal Styles
+  // 모달 스타일
   modalOverlay: {
     position: "absolute",
     top: 0,
@@ -314,7 +230,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  // Search Modal Styles
+  // 검색 모달 스타일
   searchModal: {
     backgroundColor: "#ffffff",
     borderRadius: 12,
@@ -403,7 +319,7 @@ const styles = StyleSheet.create({
     color: "#666666",
   },
 
-  // Notification Modal Styles
+  // 알림 모달 스타일
   notificationModal: {
     backgroundColor: "#ffffff",
     borderRadius: 12,
