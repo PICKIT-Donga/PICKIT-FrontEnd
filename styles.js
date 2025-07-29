@@ -138,16 +138,21 @@ const styles = StyleSheet.create({
     color: '#666',
     lineHeight: 20,
   },
+  locationicon:{
+    width:35,
+    height:35,
+  },
   feedbackHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 8,
   },
   feedbackTitle: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#000',
-    marginLeft: 8,
+    marginLeft: 2,
+    marginBottom:5
   },
   feedbackSubtitle: {
     fontSize: 12,
@@ -209,8 +214,17 @@ const styles = StyleSheet.create({
   feedbackInputSection: {
     marginTop: 24,
   },
+  feedback_wicon:{
+    flexDirection: 'row',
+  },
+  essentialicon:{
+    marginLeft:5,
+    marginTop:5,
+    width:45,
+    height:21,
+  },
   feedbackInputTitle: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#000',
     marginBottom: 8,
@@ -228,11 +242,24 @@ const styles = StyleSheet.create({
   quickOptionColumn: {
     flex: 1,
     marginRight: 8,
+    
+  },
+  serviceicon:{
+    width:15,
+    height:15,
+  },
+  placeicon:{
+    width:15,
+    height:15,
+  },
+  contentsicon:{
+    width:15,
+    height:15,
   },
   quickOptionTitle: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#ff4444',
+    color: 'black',
     marginBottom: 8,
     marginTop: 4,
   },
@@ -266,6 +293,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 16,
     borderRadius: 8,
+  },
+  writeicon:{
+    width:21,
+    height:21,
   },
   submitButtonText: {
     color: '#fff',
@@ -304,15 +335,28 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#666',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 8,
   },
+  profileicon:{
+    width:52,
+    height:52,
+    marginLeft: 17,
+  },
   authorName: {
+    marginLeft:17,
     fontSize: 14,
     fontWeight: 'bold',
     color: '#000',
+  },
+  moreicon:{
+    width:22,
+    height:22,
+  },
+  back2icon:{
+    width:12,
+    height:26,
   },
   reviewContent: {
     fontSize: 14,
@@ -357,10 +401,9 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     marginTop: 8,
   },
-  viewAllText: {
-    fontSize: 14,
-    color: '#666',
-    marginRight: 4,
+  wholereact:{
+    width:125,
+    height:38,
   },
 });
 

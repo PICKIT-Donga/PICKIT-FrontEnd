@@ -228,8 +228,11 @@ const App = () => {
         {/* Feedback Section */}
         <View style={styles.section}>
           <View style={styles.feedbackHeader}>
-            <Icon name="location-on" size={20} color="#ff4444" />
-            <Text style={styles.feedbackTitle}>현장 어때요? (우전 9시 기준)</Text>
+            <Image
+            source={require('./src/pin.png')}
+            style={styles.locationicon}
+            resizeMode="cover" />
+            <Text style={styles.feedbackTitle}>현장 어때요? (오전 9시 기준)</Text>
           </View>
           <Text style={styles.feedbackSubtitle}>
             유저들이 직접 남긴 현장 상황을 실시간으로 확인해보세요
@@ -275,14 +278,23 @@ const App = () => {
 
           {/* Feedback Input */}
           <View style={styles.feedbackInputSection}>
-            <Text style={styles.feedbackInputTitle}>지금 여기 어땠나요?</Text>
+            <View style={styles.feedback_wicon}>
+              <Text style={styles.feedbackInputTitle}>지금 여기 어땠나요?</Text>
+              <Image
+            source={require('./src/essential.png')}
+            style={styles.essentialicon}
+            resizeMode="cover" />
+            </View>
             <Text style={styles.feedbackInputSubtitle}>
               직접 느낀 좋은 점을 선택해보세요. 우선 한 마디가 큰 정보가 돼요!
             </Text>
-
+            
             <View style={styles.quickOptions}>
               <View style={styles.quickOptionColumn}>
-                <Icon name="emoji-emotions" size={20} color="#ff4444" />
+                <Image
+            source={require('./src/service.png')}
+            style={styles.serviceicon}
+            resizeMode="cover" />
                 <Text style={styles.quickOptionTitle}>서비스</Text>
                 {['안내가 명확해요', '직원이 친절해요', '예약이 편해요', '대기 시간이 짧아요'].map((option, index) => (
                   <TouchableOpacity key={index} style={styles.quickOptionButton}>
@@ -292,7 +304,10 @@ const App = () => {
               </View>
 
               <View style={styles.quickOptionColumn}>
-                <Icon name="domain" size={20} color="#ff4444" />
+                <Image
+            source={require('./src/place.png')}
+            style={styles.placeicon}
+            resizeMode="cover" />
                 <Text style={styles.quickOptionTitle}>공간 및 환경</Text>
                 {['매장이 깨끗해요', '분위기가 예뻐요', '접근성이 좋아요', '대기 공간이 넓어요'].map((option, index) => (
                   <TouchableOpacity key={index} style={styles.quickOptionButton}>
@@ -302,7 +317,10 @@ const App = () => {
               </View>
 
               <View style={styles.quickOptionColumn}>
-                <Icon name="inventory" size={20} color="#ff4444" />
+                <Image
+            source={require('./src/contents.png')}
+            style={styles.contentsicon}
+            resizeMode="cover"/>
                 <Text style={styles.quickOptionTitle}>상품 및 콘텐츠</Text>
                 {['상품이 다양해요', '퀄리티가 좋아요', '가격이 합리적이에요', '굿즈가 예뻐요'].map((option, index) => (
                   <TouchableOpacity key={index} style={styles.quickOptionButton}>
@@ -321,7 +339,10 @@ const App = () => {
             />
 
             <TouchableOpacity style={styles.submitButton}>
-              <Icon name="edit" size={20} color="#fff" />
+              <Image
+            source={require('./src/write.png')}
+            style={styles.writeicon}
+            resizeMode="cover" />
               <Text style={styles.submitButtonText}>반응 쓰기</Text>
             </TouchableOpacity>
           </View>
@@ -330,8 +351,11 @@ const App = () => {
         {/* Reviews Section */}
         <View style={styles.section}>
           <View style={styles.reviewsHeader}>
-            <Text style={styles.reviewsTitle}>받음 42</Text>
-            <Icon name="chevron-right" size={24} color="#666" />
+            <Text style={styles.reviewsTitle}>반응 42</Text>
+            <Image
+            source={require('./src/back2.png')}
+            style={styles.back2icon}
+            resizeMode="cover" />
           </View>
 
           {reviews.map((review) => (
@@ -339,12 +363,18 @@ const App = () => {
               <View style={styles.reviewHeader}>
                 <View style={styles.reviewAuthor}>
                   <View style={styles.avatar}>
-                    <Icon name="person" size={24} color="#fff" />
+                    <Image
+            source={require('./src/profile.png')}
+            style={styles.profileicon}
+            resizeMode="cover" />
                   </View>
                   <Text style={styles.authorName}>{review.author}</Text>
                 </View>
                 <TouchableOpacity>
-                  <Icon name="more-vert" size={20} color="#666" />
+                  <Image
+            source={require('./src/more.png')}
+            style={styles.moreicon}
+            resizeMode="cover" />
                 </TouchableOpacity>
               </View>
 
@@ -365,8 +395,11 @@ const App = () => {
           ))}
 
           <TouchableOpacity style={styles.viewAllButton}>
-            <Text style={styles.viewAllText}>전체 받음 보기</Text>
-            <Icon name="chevron-right" size={16} color="#666" />
+
+            <Image
+            source={require('./src/wholereact.png')}
+            style={styles.wholereact}
+            resizeMode="cover" />
           </TouchableOpacity>
         </View>
       </ScrollView>
