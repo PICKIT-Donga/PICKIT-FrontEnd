@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { View, Text, Image, TouchableOpacity, FlatList, SafeAreaView, StatusBar, Alert } from "react-native"
 import { styles } from "./styles.js"
-import PickItHeader from "./components/PickItHeader.js"
+import PickItHeader from "./components/Header.js"
 import BottomNavigation from "./components/BottomNavigation.js"
 
 // 샘플 데이터
