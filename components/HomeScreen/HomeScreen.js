@@ -7,82 +7,7 @@ import { styles } from "./HomeScreenStyles.js"
 import PickItHeader from "../Header.js"
 import NotificationModal from "../modals/NotificationModal.js"
 import SearchModal from "../modals/SearchModal.js"
-
-// 샘플 데이터
-const samplePopups = [
-  {
-    id: "1",
-    title: "미셸 들라크루아 특별전: 영원한, 화가",
-    location: "서울 강남구",
-    startDate: "2025-07-30",
-    endDate: "2025-08-30",
-    image: require("../../src/homesrc/poster1.png"),
-    category: "exhibition",
-    description: "미셸 들라크루아의 대표작들을 한자리에서 만나볼 수 있는 특별한 기회입니다.",
-    operatingHours: "월~일 : 10:00 - 19:00",
-    tags: ["전시", "미술", "특별전", "화가"],
-  },
-  {
-    id: "2",
-    title: "톰 삭스 전 <스페이스 프로그램: 인피니티 ∞>",
-    location: "서울 중구",
-    startDate: "2025-07-19",
-    endDate: "2025-11-09",
-    image: require("../../src/homesrc/poster1.png"),
-    category: "exhibition",
-    description: "톰 삭스의 우주 탐험을 주제로 한 혁신적인 전시입니다.",
-    operatingHours: "월~일 : 11:00 - 20:00",
-    tags: ["현대미술", "우주", "체험", "인터랙티브"],
-  },
-  {
-    id: "3",
-    title: "2025 앤서니 브라운展: 고릴라가 온다",
-    location: "서울 서초구",
-    startDate: "2025-05-30",
-    endDate: "2025-07-27",
-    image: require("../../src/homesrc/poster1.png"),
-    category: "exhibition",
-    description: "앤서니 브라운의 사랑받는 캐릭터들과 함께하는 특별한 전시입니다.",
-    operatingHours: "월~일 : 09:00 - 18:00",
-    tags: ["그림책", "캐릭터", "가족", "어린이"],
-  },
-  {
-    id: "4",
-    title: "모네에서 앤디워홀까지 - 컬렉션 하이라이트",
-    location: "서울 중구구",
-    startDate: "2024-11-21",
-    endDate: "2025-08-17",
-    image: require("../../src/homesrc/poster1.png"),
-    category: "exhibition",
-    description: "인상파부터 팝아트까지, 미술사의 거장들을 만나보세요.",
-    operatingHours: "화~일 : 10:00 - 18:00 (월요일 휴관)",
-    tags: ["인상파", "팝아트", "모네", "앤디워홀"],
-  },
-  {
-    id: "5",
-    title: "디즈니 캐릭터 팝업스토어",
-    location: "서울 강남구",
-    startDate: "2025-01-15",
-    endDate: "2025-02-29",
-    image: require("../../src/homesrc/poster1.png"),
-    category: "trending",
-    description: "디즈니의 사랑받는 캐릭터들과 함께하는 특별한 팝업스토어입니다.",
-    operatingHours: "월~일 : 10:00 - 22:00",
-    tags: ["디즈니", "캐릭터", "굿즈", "팝업"],
-  },
-  {
-    id: "6",
-    title: "한정판 스니커즈 팝업",
-    location: "서울 중구",
-    startDate: "2025-02-10",
-    endDate: "2025-02-20",
-    image: require("../../src/homesrc/poster1.png"),
-    category: "fashion",
-    description: "전 세계 한정판 스니커즈를 만나볼 수 있는 특별한 기회입니다.",
-    operatingHours: "월~일 : 11:00 - 21:00",
-    tags: ["스니커즈", "한정판", "패션", "컬렉션"],
-  },
-]
+import { popupData } from "../../DATA/popupData.js"
 
 // 팝업 카드 컴포넌트
 const PopupCard = ({ popup, onDetailPress }) => {
@@ -136,7 +61,7 @@ const PopupCard = ({ popup, onDetailPress }) => {
 // 메인 앱 컴포넌트
 const HomeScreen = () => {
   const navigation = useNavigation()
-  const [popups, setPopups] = useState(samplePopups)
+  const [popups, setPopups] = useState(popupData)
   const [activeTab, setActiveTab] = useState("home")
   const [showNotifications, setShowNotifications] = useState(false)
   const [showSearch, setShowSearch] = useState(false)

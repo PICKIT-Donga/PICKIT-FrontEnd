@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Image } from "react-native"
 
-// 컴포넌트 경로
-import HomeScreen from "../HomeScreen/HomeScreen.js"
-import MapScreen from "../MapScreen/MapScreen.js"
+// 컴포넌트 경로 수정
 import CalendarScreen from "../CalendarScreen/CalendarScreen.js"
 import ProfileScreen from "../ProfileScreen/ProfileScreen.js"
+import HomeStackNavigator from "./HomeStackNavigator.js"
+import MapStackNavigator from "./MapStackNavigator.js"
 
 const Tab = createBottomTabNavigator()
 
@@ -30,7 +30,7 @@ export default function BottomNavigator() {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStackNavigator}
         options={{
           title: "홈",
           tabBarIcon: ({ color, size, focused }) => (
@@ -48,7 +48,7 @@ export default function BottomNavigator() {
       />
       <Tab.Screen
         name="Map"
-        component={MapScreen}
+        component={MapStackNavigator}
         options={{
           title: "지도",
           tabBarIcon: ({ color, size, focused }) => (

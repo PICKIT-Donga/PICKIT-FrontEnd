@@ -1,19 +1,20 @@
 import { createStackNavigator } from "@react-navigation/stack"
-import BottomNavigator from "./BottomNavigator.js"
+import MapScreen from "../MapScreen/MapScreen.js"
 import DetailpageScreen from "../DetailpageScreen/DetailpageScreen.js"
 
 const Stack = createStackNavigator()
 
-export default function StackNavigator() {
+export default function MapStackNavigator() {
   return (
     <Stack.Navigator
+      initialRouteName="MapScreen"
       screenOptions={{
-        headerShown: false, // 모든 스크린에서 헤더 숨김
+        headerShown: false,
       }}
     >
       <Stack.Screen
-        name="MainTabs"
-        component={BottomNavigator}
+        name="MapScreen"
+        component={MapScreen}
         options={{
           headerShown: false,
         }}
@@ -23,7 +24,7 @@ export default function StackNavigator() {
         component={DetailpageScreen}
         options={{
           headerShown: false,
-          presentation: "card", // iOS에서 카드 스타일 전환
+          presentation: "card",
         }}
       />
     </Stack.Navigator>

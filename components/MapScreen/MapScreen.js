@@ -7,6 +7,7 @@ import styles from "./MapScreenStyles.js"
 import PickItHeader from "../Header.js"
 import NotificationModal from "../modals/NotificationModal.js"
 import SearchModal from "../modals/SearchModal.js"
+import { popupData } from "../../DATA/popupData.js"
 
 const regions = [
   { id: "all", name: "전체", active: true },
@@ -54,99 +55,6 @@ const seoulDistricts = [
   { id: "jongno", name: "종로구" },
   { id: "jungnang", name: "중랑구" },
   { id: "jung", name: "중구" },
-]
-
-const popupStores = [
-  {
-    id: 1,
-    title: "퍼센테이지 디자인 팝업스토어",
-    location: "부산 진구",
-    date: "25.07.13 - 25.10.21",
-    startDate: "2025-07-13",
-    endDate: "2025-10-21",
-    description: "2025년 여름에도 퍼디가 트위에뜨올에 찾아왔어요. 특별한 디자인 아이템들을 만나보세요.",
-    image: { uri: "https://via.placeholder.com/80x80" },
-    liked: false,
-    region: "busan",
-    district: null,
-    operatingHours: "월~일 : 11:00 - 21:00",
-    tags: ["디자인", "퍼센테이지", "부산", "팝업"],
-  },
-  {
-    id: 2,
-    title: "웃수터 놀이터 팝업스토어",
-    location: "서울 성동구",
-    date: "25.07.18 - 25.07.27",
-    startDate: "2025-07-18",
-    endDate: "2025-07-27",
-    description: "성수에 등장할 예정이라는 거대 놀이터가 있다고? 어른들을 위한 특별한 놀이 공간입니다.",
-    image: { uri: "https://via.placeholder.com/80x80" },
-    liked: false,
-    region: "seoul",
-    district: "seongdong",
-    operatingHours: "월~일 : 10:00 - 20:00",
-    tags: ["놀이터", "성수", "체험", "인터랙티브"],
-  },
-  {
-    id: 3,
-    title: "번개표 팝업스토어",
-    location: "서울 강남구",
-    date: "25.07.11 - 25.07.24",
-    startDate: "2025-07-11",
-    endDate: "2025-07-24",
-    description: "2025년으로 리뉴얼한 번개표의 컬 컬러빌리지의 문을 여시네요. 새로운 컬렉션을 만나보세요.",
-    image: { uri: "https://via.placeholder.com/80x80" },
-    liked: false,
-    region: "seoul",
-    district: "gangnam",
-    operatingHours: "월~일 : 11:00 - 22:00",
-    tags: ["번개표", "패션", "컬러", "강남"],
-  },
-  {
-    id: 4,
-    title: "부산 해운대 팝업스토어",
-    location: "부산 해운대구",
-    date: "25.07.20 - 25.08.15",
-    startDate: "2025-07-20",
-    endDate: "2025-08-15",
-    description: "바다가 보이는 특별한 팝업스토어가 해운대에 오픈했어요. 여름 바캉스와 함께 즐겨보세요.",
-    image: { uri: "https://via.placeholder.com/80x80" },
-    liked: false,
-    region: "busan",
-    district: null,
-    operatingHours: "월~일 : 09:00 - 21:00",
-    tags: ["해운대", "바다", "여름", "바캉스"],
-  },
-  {
-    id: 5,
-    title: "경기 수원 팝업스토어",
-    location: "경기 수원시",
-    date: "25.07.25 - 25.08.10",
-    startDate: "2025-07-25",
-    endDate: "2025-08-10",
-    description: "수원 화성 근처에 새로운 팝업스토어가 등장했습니다. 전통과 현대가 만나는 특별한 공간입니다.",
-    image: { uri: "https://via.placeholder.com/80x80" },
-    liked: false,
-    region: "gyeonggi",
-    district: null,
-    operatingHours: "월~일 : 10:00 - 19:00",
-    tags: ["수원", "화성", "전통", "현대"],
-  },
-  {
-    id: 6,
-    title: "대전 유성구 팝업스토어",
-    location: "대전 유성구",
-    date: "25.08.01 - 25.08.20",
-    startDate: "2025-08-01",
-    endDate: "2025-08-20",
-    description: "과학도시 대전에 테크 관련 팝업스토어가 오픈합니다. 최신 기술을 체험해보세요.",
-    image: { uri: "https://via.placeholder.com/80x80" },
-    liked: false,
-    region: "daejeon",
-    district: null,
-    operatingHours: "월~일 : 11:00 - 20:00",
-    tags: ["대전", "테크", "과학", "기술"],
-  },
 ]
 
 // 구별 지도 이미지
@@ -200,13 +108,14 @@ const MapScreen = () => {
   const [showSearch, setShowSearch] = useState(false)
   const [activeTab, setActiveTab] = useState("map")
 
+  // 공통 데이터 사용
   const filteredStores = selectedDistrict
-    ? popupStores.filter((store) => store.district === selectedDistrict)
+    ? popupData.filter((store) => store.district === selectedDistrict)
     : selectedRegion === "seoul"
-      ? popupStores.filter((store) => store.region === "seoul")
+      ? popupData.filter((store) => store.region === "seoul")
       : selectedRegion === "all"
-        ? popupStores
-        : popupStores.filter((store) => store.region === selectedRegion)
+        ? popupData
+        : popupData.filter((store) => store.region === selectedRegion)
 
   const handleNotificationPress = () => {
     setShowNotifications(true)
@@ -228,7 +137,7 @@ const MapScreen = () => {
     setShowSearch(false)
   }
 
-  // 스토어 아이템 터치 시 DetailpageScreen으로 이동
+  // 스토어 아이템 터치 시 DetailpageScreen으로 이동 - 공통 데이터 전달
   const handleStorePress = (store) => {
     navigation.navigate("DetailpageScreen", {
       popupData: store,
@@ -424,7 +333,15 @@ const MapScreen = () => {
               activeOpacity={0.8}
             >
               <View style={styles.storeImageContainer}>
-                <Image source={store.image} style={styles.storeImage} resizeMode="cover" />
+                <Image
+                  source={
+                    store.image?.uri
+                      ? { uri: store.image.uri }
+                      : store.image || require("../../src/homesrc/poster1.png")
+                  }
+                  style={styles.storeImage}
+                  resizeMode="cover"
+                />
               </View>
               <View style={styles.storeInfo}>
                 <View style={styles.storeTitleRow}>
@@ -443,7 +360,11 @@ const MapScreen = () => {
                   <MapPinIcon />
                   <Text style={styles.storeLocation}>{store.location}</Text>
                 </View>
-                <Text style={styles.storeDate}>{store.date}</Text>
+                <Text style={styles.storeDate}>
+                  {store.startDate && store.endDate
+                    ? `${store.startDate.slice(2).replace(/-/g, ".")} - ${store.endDate.slice(2).replace(/-/g, ".")}`
+                    : store.date || "날짜 정보 없음"}
+                </Text>
                 <Text style={styles.storeDescription} numberOfLines={2}>
                   {store.description}
                 </Text>
