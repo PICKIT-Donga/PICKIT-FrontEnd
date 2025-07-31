@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { View, Text, Image, TouchableOpacity, FlatList, SafeAreaView, StatusBar, Alert } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import { styles } from "./HomeScreenStyles.js"
 import PickItHeader from "../Header.js"
 import NotificationModal from "../modals/NotificationModal.js"
@@ -17,6 +18,9 @@ const samplePopups = [
     endDate: "2025-08-30",
     image: require("../../src/homesrc/poster1.png"),
     category: "exhibition",
+    description: "미셸 들라크루아의 대표작들을 한자리에서 만나볼 수 있는 특별한 기회입니다.",
+    operatingHours: "월~일 : 10:00 - 19:00",
+    tags: ["전시", "미술", "특별전", "화가"],
   },
   {
     id: "2",
@@ -26,6 +30,9 @@ const samplePopups = [
     endDate: "2025-11-09",
     image: require("../../src/homesrc/poster1.png"),
     category: "exhibition",
+    description: "톰 삭스의 우주 탐험을 주제로 한 혁신적인 전시입니다.",
+    operatingHours: "월~일 : 11:00 - 20:00",
+    tags: ["현대미술", "우주", "체험", "인터랙티브"],
   },
   {
     id: "3",
@@ -35,6 +42,9 @@ const samplePopups = [
     endDate: "2025-07-27",
     image: require("../../src/homesrc/poster1.png"),
     category: "exhibition",
+    description: "앤서니 브라운의 사랑받는 캐릭터들과 함께하는 특별한 전시입니다.",
+    operatingHours: "월~일 : 09:00 - 18:00",
+    tags: ["그림책", "캐릭터", "가족", "어린이"],
   },
   {
     id: "4",
@@ -44,6 +54,9 @@ const samplePopups = [
     endDate: "2025-08-17",
     image: require("../../src/homesrc/poster1.png"),
     category: "exhibition",
+    description: "인상파부터 팝아트까지, 미술사의 거장들을 만나보세요.",
+    operatingHours: "화~일 : 10:00 - 18:00 (월요일 휴관)",
+    tags: ["인상파", "팝아트", "모네", "앤디워홀"],
   },
   {
     id: "5",
@@ -53,6 +66,9 @@ const samplePopups = [
     endDate: "2025-02-29",
     image: require("../../src/homesrc/poster1.png"),
     category: "trending",
+    description: "디즈니의 사랑받는 캐릭터들과 함께하는 특별한 팝업스토어입니다.",
+    operatingHours: "월~일 : 10:00 - 22:00",
+    tags: ["디즈니", "캐릭터", "굿즈", "팝업"],
   },
   {
     id: "6",
@@ -62,6 +78,9 @@ const samplePopups = [
     endDate: "2025-02-20",
     image: require("../../src/homesrc/poster1.png"),
     category: "fashion",
+    description: "전 세계 한정판 스니커즈를 만나볼 수 있는 특별한 기회입니다.",
+    operatingHours: "월~일 : 11:00 - 21:00",
+    tags: ["스니커즈", "한정판", "패션", "컬렉션"],
   },
 ]
 
@@ -78,11 +97,11 @@ const PopupCard = ({ popup, onDetailPress }) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.card}>
-        {/* 1. 사진 */}
+        {/* 1. 사진 - 터치 이벤트 제거 */}
         <Image source={require("../../src/homesrc/poster1.png")} style={styles.cardImage} resizeMode="cover" />
 
         <View style={styles.cardContent}>
-          {/* 2. Detail 버튼 */}
+          {/* 2. Detail 버튼 - 터치 이벤트만 유지 */}
           <TouchableOpacity style={styles.cardButton} onPress={() => onDetailPress(popup)} activeOpacity={0.7}>
             <Image
               source={require("../../src/homesrc/detailbutton.png")}
@@ -116,6 +135,7 @@ const PopupCard = ({ popup, onDetailPress }) => {
 
 // 메인 앱 컴포넌트
 const HomeScreen = () => {
+  const navigation = useNavigation()
   const [popups, setPopups] = useState(samplePopups)
   const [activeTab, setActiveTab] = useState("home")
   const [showNotifications, setShowNotifications] = useState(false)
@@ -136,7 +156,10 @@ const HomeScreen = () => {
   }
 
   const handleDetailPress = (popup) => {
-    Alert.alert("상세보기", `${popup.title}의 상세 정보를 확인합니다.`)
+    // DetailpageScreen으로 네비게이션하면서 데이터 전달
+    navigation.navigate("DetailpageScreen", {
+      popupData: popup,
+    })
   }
 
   const handleTabChange = (tab) => {
@@ -203,9 +226,6 @@ const HomeScreen = () => {
 
       {/* 검색 모달 */}
       <SearchModal visible={showSearch} onClose={handleCloseSearch} searchData={popups} />
-
-      {/* 하단 네비게이션 */}
-      {/* <BottomNavigation activeTab={activeTab} onTabChange={handleTabChange} /> */}
     </SafeAreaView>
   )
 }

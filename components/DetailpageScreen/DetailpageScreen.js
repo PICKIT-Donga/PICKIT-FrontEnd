@@ -14,11 +14,16 @@ import {
   Modal,
   Alert,
 } from "react-native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import styles from "./DetailpageScreenStyles.js"
 
 const { width } = Dimensions.get("window")
 
-const DatailpageScreen = () => {
+const DetailpageScreen = () => {
+  const navigation = useNavigation()
+  const route = useRoute()
+  const { popupData } = route.params || {}
+
   const [selectedTab, setSelectedTab] = useState("후기")
   const [feedbackText, setFeedbackText] = useState("")
   const [selectedTags, setSelectedTags] = useState([])
@@ -31,6 +36,11 @@ const DatailpageScreen = () => {
   const [editingComment, setEditingComment] = useState(null)
   const [editText, setEditText] = useState("")
   const categoryScrollRef = useRef(null)
+
+  // 뒤로가기 핸들러
+  const handleBackPress = () => {
+    navigation.goBack()
+  }
 
   // 현재 시간 업데이트
   useEffect(() => {
@@ -572,13 +582,23 @@ const DatailpageScreen = () => {
     </Modal>
   )
 
+  // 날짜 포맷팅 함수
+  const formatDate = (dateString) => {
+    if (!dateString) return ""
+    const date = new Date(dateString)
+    const year = date.getFullYear().toString().slice(-2)
+    const month = (date.getMonth() + 1).toString().padStart(2, "0")
+    const day = date.getDate().toString().padStart(2, "0")
+    return `${year}.${month}.${day}`
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
 
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleBackPress}>
           <Image source={require("../../src/detailpagesrc/backicon.png")} style={styles.back} resizeMode="cover" />
         </TouchableOpacity>
         <View style={styles.headerIcons}>
@@ -598,26 +618,38 @@ const DatailpageScreen = () => {
       <ScrollView style={styles.scrollView}>
         {/* Event Poster */}
         <View style={styles.posterContainer}>
-          <Image source={require("../../src/poster1.png")} style={styles.posterImage} resizeMode="cover" />
+          <Image
+            source={popupData?.image || require("../../src/poster1.png")}
+            style={styles.posterImage}
+            resizeMode="cover"
+          />
         </View>
 
         {/* Event Info */}
         <View style={styles.eventInfo}>
-          <Text style={styles.eventTitle}>오브젝트 서교 마쉬빌 퀵스카우트</Text>
-          <Text style={styles.eventDate}>25.05.30 - 25.07.27</Text>
+          <Text style={styles.eventTitle}>{popupData?.title || "오브젝트 서교 마쉬빌 퀵스카우트"}</Text>
+          <Text style={styles.eventDate}>
+            {popupData?.startDate && popupData?.endDate
+              ? `${formatDate(popupData.startDate)} - ${formatDate(popupData.endDate)}`
+              : "25.05.30 - 25.07.27"}
+          </Text>
 
           <View style={styles.infoRow}>
             <Image source={require("../../src/common/pickitpin.png")} style={styles.pin} resizeMode="cover" />
-            <Text style={styles.infoText}>서울 마포구 와우산로35길 13 오브젝트 서교</Text>
+            <Text style={styles.infoText}>{popupData?.location || "서울 마포구 와우산로35길 13 오브젝트 서교"}</Text>
           </View>
 
           <View style={styles.infoRow}>
-            <Image source={require("../../src/detailpagesrc/timeicon.png")} style={styles.timeicon} resizeMode="cover" />
-            <Text style={styles.infoText}>월~일 : 11:00 - 21:00</Text>
+            <Image
+              source={require("../../src/detailpagesrc/timeicon.png")}
+              style={styles.timeicon}
+              resizeMode="cover"
+            />
+            <Text style={styles.infoText}>{popupData?.operatingHours || "월~일 : 11:00 - 21:00"}</Text>
           </View>
 
           <View style={styles.tagContainer}>
-            {["오브젝트", "캐릭터", "다이노탱", "전시"].map((tag, index) => (
+            {(popupData?.tags || ["오브젝트", "캐릭터", "다이노탱", "전시"]).map((tag, index) => (
               <View key={index} style={styles.eventTag}>
                 <Text style={styles.eventTagText}>{tag}</Text>
               </View>
@@ -639,16 +671,21 @@ const DatailpageScreen = () => {
             >
               <Text style={styles.joinText}>[ Join Us! ] 퀵스카우트 대원 모집!🏕️</Text>
               <Text style={styles.descriptionText}>
-                [ 오브젝트 서교/ 에디트 : Marshville Quokscout 🏕️ ]{"\n"}
-                오브젝트가 마쉬빌 퀵스카우트 캠핑장으로 변신합니다!{"\n\n"}
-                특히 이번 전시는 서울 서교점과 부산 에디트점까지{"\n"}
-                퀵스카우트의 베이스캠프로 꾸며져,{"\n"}
-                다양한 체험형 전시 공간으로 가득 채워질 예정입니다{"\n\n"}
-                캠핑의 즐거움과 퀵스카우트의 매력을 동시에 느낄 수 있는{"\n"}
-                특별한 공간으로 여러분을 초대합니다.{"\n\n"}
-                다양한 포토존과 체험 공간이 마련되어 있어{"\n"}
-                방문객들에게 잊지 못할 추억을 선사할 것입니다.{"\n\n"}
-                이번 기회를 놓치지 마시고 꼭 방문해보세요!
+                {popupData?.description ||
+                  `[ 오브젝트 서교/ 에디트 : Marshville Quokscout 🏕️ ]
+오브젝트가 마쉬빌 퀵스카우트 캠핑장으로 변신합니다!
+
+특히 이번 전시는 서울 서교점과 부산 에디트점까지
+퀵스카우트의 베이스캠프로 꾸며져,
+다양한 체험형 전시 공간으로 가득 채워질 예정입니다
+
+캠핑의 즐거움과 퀵스카우트의 매력을 동시에 느낄 수 있는
+특별한 공간으로 여러분을 초대합니다.
+
+다양한 포토존과 체험 공간이 마련되어 있어
+방문객들에게 잊지 못할 추억을 선사할 것입니다.
+
+이번 기회를 놓치지 마시고 꼭 방문해보세요!`}
               </Text>
             </ScrollView>
           </View>
@@ -835,4 +872,4 @@ const DatailpageScreen = () => {
   )
 }
 
-export default DatailpageScreen
+export default DetailpageScreen
