@@ -1,9 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { View, Text, ScrollView, TouchableOpacity, Image, SafeAreaView, TextInput } from "react-native"
+import { View, Text, ScrollView, TouchableOpacity, Image, SafeAreaView } from "react-native"
 import styles from "./MapScreenStyles.js"
 import PickItHeader from "../Header.js"
+import NotificationModal from "../modals/NotificationModal.js"
+import SearchModal from "../modals/SearchModal.js"
 
 const regions = [
   { id: "all", name: "전체", active: true },
@@ -26,31 +28,31 @@ const regions = [
 ]
 
 const seoulDistricts = [
-{ id: "gangnam", name: "강남구" },
-{ id: "gangdong", name: "강동구" },
-{ id: "gangbuk", name: "강북구" },
-{ id: "gangseo", name: "강서구" },
-{ id: "gwanak", name: "관악구" },
-{ id: "gwangjin", name: "광진구" },
-{ id: "guro", name: "구로구" },
-{ id: "geumcheon", name: "금천구" },
-{ id: "nowon", name: "노원구" },
-{ id: "dobong", name: "도봉구" },
-{ id: "dongjak", name: "동작구" },
-{ id: "dongdaemun", name: "동대문구" },
-{ id: "mapo", name: "마포구" },
-{ id: "seodaemun", name: "서대문구" },
-{ id: "seocho", name: "서초구" },
-{ id: "seongdong", name: "성동구" },
-{ id: "seongbuk", name: "성북구" },
-{ id: "songpa", name: "송파구" },
-{ id: "yangcheon", name: "양천구" },
-{ id: "yeongdeungpo", name: "영등포구" },
-{ id: "yongsan", name: "용산구" },
-{ id: "eunpyeong", name: "은평구" },
-{ id: "jongno", name: "종로구" },
-{ id: "jungnang", name: "중랑구" },
-{ id: "jung", name: "중구" },
+  { id: "gangnam", name: "강남구" },
+  { id: "gangdong", name: "강동구" },
+  { id: "gangbuk", name: "강북구" },
+  { id: "gangseo", name: "강서구" },
+  { id: "gwanak", name: "관악구" },
+  { id: "gwangjin", name: "광진구" },
+  { id: "guro", name: "구로구" },
+  { id: "geumcheon", name: "금천구" },
+  { id: "nowon", name: "노원구" },
+  { id: "dobong", name: "도봉구" },
+  { id: "dongjak", name: "동작구" },
+  { id: "dongdaemun", name: "동대문구" },
+  { id: "mapo", name: "마포구" },
+  { id: "seodaemun", name: "서대문구" },
+  { id: "seocho", name: "서초구" },
+  { id: "seongdong", name: "성동구" },
+  { id: "seongbuk", name: "성북구" },
+  { id: "songpa", name: "송파구" },
+  { id: "yangcheon", name: "양천구" },
+  { id: "yeongdeungpo", name: "영등포구" },
+  { id: "yongsan", name: "용산구" },
+  { id: "eunpyeong", name: "은평구" },
+  { id: "jongno", name: "종로구" },
+  { id: "jungnang", name: "중랑구" },
+  { id: "jung", name: "중구" },
 ]
 
 const popupStores = [
@@ -60,7 +62,7 @@ const popupStores = [
     location: "부산 진구",
     date: "25.07.13 - 25.10.21",
     description: "2025년 여름에도 퍼디가 트위에뜨올에 찾아왔어요...",
-    image: "https://via.placeholder.com/80x80",
+    image: { uri: "https://via.placeholder.com/80x80" },
     liked: false,
     region: "busan",
     district: null,
@@ -71,7 +73,7 @@ const popupStores = [
     location: "서울 성동구",
     date: "25.07.18 - 25.07.27",
     description: "성수에 등장할 예정이라는 거대 놀이터가 있다고?...",
-    image: "https://via.placeholder.com/80x80",
+    image: { uri: "https://via.placeholder.com/80x80" },
     liked: false,
     region: "seoul",
     district: "seongdong",
@@ -82,7 +84,7 @@ const popupStores = [
     location: "서울 강남구",
     date: "25.07.11 - 25.07.24",
     description: "2025년으로 리뉴얼한 번개표의 컬 컬러빌리지의 문을 여시네...",
-    image: "https://via.placeholder.com/80x80",
+    image: { uri: "https://via.placeholder.com/80x80" },
     liked: false,
     region: "seoul",
     district: "gangnam",
@@ -93,7 +95,7 @@ const popupStores = [
     location: "부산 해운대구",
     date: "25.07.20 - 25.08.15",
     description: "바다가 보이는 특별한 팝업스토어가 해운대에 오픈했어요...",
-    image: "https://via.placeholder.com/80x80",
+    image: { uri: "https://via.placeholder.com/80x80" },
     liked: false,
     region: "busan",
     district: null,
@@ -104,7 +106,7 @@ const popupStores = [
     location: "경기 수원시",
     date: "25.07.25 - 25.08.10",
     description: "수원 화성 근처에 새로운 팝업스토어가 등장했습니다...",
-    image: "https://via.placeholder.com/80x80",
+    image: { uri: "https://via.placeholder.com/80x80" },
     liked: false,
     region: "gyeonggi",
     district: null,
@@ -115,7 +117,7 @@ const popupStores = [
     location: "대전 유성구",
     date: "25.08.01 - 25.08.20",
     description: "과학도시 대전에 테크 관련 팝업스토어가 오픈합니다...",
-    image: "https://via.placeholder.com/80x80",
+    image: { uri: "https://via.placeholder.com/80x80" },
     liked: false,
     region: "daejeon",
     district: null,
@@ -149,8 +151,7 @@ const districtMapImages = {
   jongno: require("../../src/locationmapimg/seoul/Jongno-gu.png"),
   jungnang: require("../../src/locationmapimg/seoul/Jungnang-gu.png"),
   jung: require("../../src/locationmapimg/seoul/Jung-gu.png"),
-};
-
+}
 
 // 간단한 아이콘 컴포넌트들
 const HeartIcon = ({ filled, onPress }) => (
@@ -171,44 +172,14 @@ const MapScreen = () => {
   const [likedStores, setLikedStores] = useState([])
   const [showNotifications, setShowNotifications] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [notificationCount, setNotificationCount] = useState(3)
   const [activeTab, setActiveTab] = useState("map")
-
-  const notifications = [
-    {
-      id: 1,
-      title: "새로운 팝업스토어가 등록되었습니다",
-      message: "GS25 X 돈키호테 더현대서울점이 오픈했어요!",
-      time: "2시간 전",
-      isRead: false,
-    },
-    {
-      id: 2,
-      title: "관심 팝업스토어 마감 임박",
-      message: "번개표 팝업스토어가 3일 후 마감됩니다.",
-      time: "1일 전",
-      isRead: false,
-    },
-    {
-      id: 3,
-      title: "새로운 지역에 팝업스토어 오픈",
-      message: "부산 지역에 새로운 팝업스토어가 오픈했습니다.",
-      time: "2일 전",
-      isRead: true,
-    },
-  ]
 
   const filteredStores = selectedDistrict
     ? popupStores.filter((store) => store.district === selectedDistrict)
     : selectedRegion === "seoul"
       ? popupStores.filter((store) => store.region === "seoul")
       : selectedRegion === "all"
-        ? popupStores.filter(
-            (store) =>
-              store.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              store.location.toLowerCase().includes(searchQuery.toLowerCase()),
-          )
+        ? popupStores
         : popupStores.filter((store) => store.region === selectedRegion)
 
   const handleNotificationPress = () => {
@@ -229,11 +200,6 @@ const MapScreen = () => {
 
   const handleCloseSearch = () => {
     setShowSearch(false)
-    setSearchQuery("")
-  }
-
-  const markNotificationAsRead = (notificationId) => {
-    console.log(`알림 ${notificationId} 읽음 처리됨`)
   }
 
   const handleRegionClick = (regionId) => {
@@ -420,7 +386,7 @@ const MapScreen = () => {
           {filteredStores.map((store) => (
             <View key={store.id} style={styles.storeItem}>
               <View style={styles.storeImageContainer}>
-                <Image source={{ uri: store.image }} style={styles.storeImage} resizeMode="cover" />
+                <Image source={store.image} style={styles.storeImage} resizeMode="cover" />
               </View>
               <View style={styles.storeInfo}>
                 <View style={styles.storeTitleRow}>
@@ -443,79 +409,12 @@ const MapScreen = () => {
         </View>
       </ScrollView>
 
-      {/* 검색 모달 */}
-      {showSearch && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.searchModal}>
-            <View style={styles.searchHeader}>
-              <Text style={styles.searchTitle}>팝업스토어 검색</Text>
-              <TouchableOpacity onPress={handleCloseSearch} style={styles.closeButton}>
-                <Text style={styles.closeButtonText}>✕</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.searchInputContainer}>
-              <Text style={styles.searchIcon}>🔍</Text>
-              <TextInput
-                style={styles.searchInput}
-                placeholder="팝업스토어명 또는 지역을 검색하세요"
-                value={searchQuery}
-                onChangeText={setSearchQuery}
-                autoFocus
-              />
-            </View>
-            <ScrollView style={styles.searchResults}>
-              {filteredStores.map((store) => (
-                <TouchableOpacity key={store.id} style={styles.searchResultItem}>
-                  <Image source={{ uri: store.image }} style={styles.searchResultImage} />
-                  <View style={styles.searchResultInfo}>
-                    <Text style={styles.searchResultTitle}>{store.title}</Text>
-                    <Text style={styles.searchResultLocation}>{store.location}</Text>
-                    <Text style={styles.searchResultDate}>{store.date}</Text>
-                  </View>
-                </TouchableOpacity>
-              ))}
-              {searchQuery && filteredStores.length === 0 && (
-                <View style={styles.noResults}>
-                  <Text style={styles.noResultsText}>검색 결과가 없습니다</Text>
-                </View>
-              )}
-            </ScrollView>
-          </View>
-        </View>
-      )}
-
       {/* 알림 모달 */}
-      {showNotifications && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.notificationModal}>
-            <View style={styles.notificationHeader}>
-              <Text style={styles.notificationTitle}>알림</Text>
-              <TouchableOpacity onPress={handleCloseNotifications} style={styles.closeButton}>
-                <Text style={styles.closeButtonText}>✕</Text>
-              </TouchableOpacity>
-            </View>
-            <ScrollView style={styles.notificationList}>
-              {notifications.map((notification) => (
-                <TouchableOpacity
-                  key={notification.id}
-                  style={[styles.notificationItem, !notification.isRead && styles.unreadNotification]}
-                  onPress={() => markNotificationAsRead(notification.id)}
-                >
-                  <View style={styles.notificationContent}>
-                    <Text style={styles.notificationItemTitle}>{notification.title}</Text>
-                    <Text style={styles.notificationMessage}>{notification.message}</Text>
-                    <Text style={styles.notificationTime}>{notification.time}</Text>
-                  </View>
-                  {!notification.isRead && <View style={styles.unreadDot} />}
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </View>
-        </View>
-      )}
+      <NotificationModal visible={showNotifications} onClose={handleCloseNotifications} />
 
-      {/* 하단 네비게이션 */}
-      {/* <BottomNavigation activeTab={activeTab} onTabChange={handleTabChange} /> */}
+      {/* 검색 모달 */}
+      <SearchModal visible={showSearch} onClose={handleCloseSearch} searchData={filteredStores} />
+
     </SafeAreaView>
   )
 }

@@ -4,6 +4,8 @@ import { useState } from "react"
 import { View, Text, Image, TouchableOpacity, FlatList, SafeAreaView, StatusBar, Alert } from "react-native"
 import { styles } from "./HomeScreenStyles.js"
 import PickItHeader from "../Header.js"
+import NotificationModal from "../modals/NotificationModal.js"
+import SearchModal from "../modals/SearchModal.js"
 
 // 샘플 데이터
 const samplePopups = [
@@ -13,7 +15,7 @@ const samplePopups = [
     location: "서울 강남구",
     startDate: "2025-07-30",
     endDate: "2025-08-30",
-    image: "./src/homesrc/poster1.png",
+    image: require("../../src/homesrc/poster1.png"),
     category: "exhibition",
   },
   {
@@ -22,7 +24,7 @@ const samplePopups = [
     location: "서울 중구",
     startDate: "2025-07-19",
     endDate: "2025-11-09",
-    image: "./src/homesrc/poster1.png",
+    image: require("../../src/homesrc/poster1.png"),
     category: "exhibition",
   },
   {
@@ -31,7 +33,7 @@ const samplePopups = [
     location: "서울 서초구",
     startDate: "2025-05-30",
     endDate: "2025-07-27",
-    image: "./src/homesrc/poster1.png",
+    image: require("../../src/homesrc/poster1.png"),
     category: "exhibition",
   },
   {
@@ -40,7 +42,7 @@ const samplePopups = [
     location: "서울 중구구",
     startDate: "2024-11-21",
     endDate: "2025-08-17",
-    image: "./src/homesrc/poster1.png",
+    image: require("../../src/homesrc/poster1.png"),
     category: "exhibition",
   },
   {
@@ -49,7 +51,7 @@ const samplePopups = [
     location: "서울 강남구",
     startDate: "2025-01-15",
     endDate: "2025-02-29",
-    image: "./src/homesrc/poster1.png",
+    image: require("../../src/homesrc/poster1.png"),
     category: "trending",
   },
   {
@@ -58,7 +60,7 @@ const samplePopups = [
     location: "서울 중구",
     startDate: "2025-02-10",
     endDate: "2025-02-20",
-    image: "./src/homesrc/poster1.png",
+    image: require("../../src/homesrc/poster1.png"),
     category: "fashion",
   },
 ]
@@ -82,7 +84,11 @@ const PopupCard = ({ popup, onDetailPress }) => {
         <View style={styles.cardContent}>
           {/* 2. Detail 버튼 */}
           <TouchableOpacity style={styles.cardButton} onPress={() => onDetailPress(popup)} activeOpacity={0.7}>
-            <Image source={require("../../src/homesrc/detailbutton.png")} style={styles.cardButtonImage} resizeMode="contain" />
+            <Image
+              source={require("../../src/homesrc/detailbutton.png")}
+              style={styles.cardButtonImage}
+              resizeMode="contain"
+            />
           </TouchableOpacity>
 
           {/* 3. 제목 - 한 줄만 표시하고 말줄임표 처리 */}
@@ -112,6 +118,8 @@ const PopupCard = ({ popup, onDetailPress }) => {
 const HomeScreen = () => {
   const [popups, setPopups] = useState(samplePopups)
   const [activeTab, setActiveTab] = useState("home")
+  const [showNotifications, setShowNotifications] = useState(false)
+  const [showSearch, setShowSearch] = useState(false)
 
   // 이벤트 핸들러들
   const handleLogoPress = () => {
@@ -120,11 +128,11 @@ const HomeScreen = () => {
   }
 
   const handleNotificationPress = () => {
-    Alert.alert("알림", "알림 기능이 클릭되었습니다.")
+    setShowNotifications(true)
   }
 
   const handleSearchPress = () => {
-    Alert.alert("검색", "검색 기능이 클릭되었습니다.")
+    setShowSearch(true)
   }
 
   const handleDetailPress = (popup) => {
@@ -140,6 +148,14 @@ const HomeScreen = () => {
     }
   }
 
+  const handleCloseNotifications = () => {
+    setShowNotifications(false)
+  }
+
+  const handleCloseSearch = () => {
+    setShowSearch(false)
+  }
+
   const renderPopupCard = ({ item, index }) => <PopupCard popup={item} onDetailPress={handleDetailPress} />
 
   return (
@@ -147,8 +163,8 @@ const HomeScreen = () => {
       <StatusBar barStyle="dark-content" backgroundColor="white" />
 
       {/* 헤더 */}
-      <PickItHeader 
-        onNotificationPress={handleNotificationPress} 
+      <PickItHeader
+        onNotificationPress={handleNotificationPress}
         onSearchPress={handleSearchPress}
         onLogoPress={handleLogoPress}
       />
@@ -182,10 +198,16 @@ const HomeScreen = () => {
         )}
       </View>
 
+      {/* 알림 모달 */}
+      <NotificationModal visible={showNotifications} onClose={handleCloseNotifications} />
+
+      {/* 검색 모달 */}
+      <SearchModal visible={showSearch} onClose={handleCloseSearch} searchData={popups} />
+
       {/* 하단 네비게이션 */}
       {/* <BottomNavigation activeTab={activeTab} onTabChange={handleTabChange} /> */}
     </SafeAreaView>
   )
 }
 
-export default HomeScreen;
+export default HomeScreen
