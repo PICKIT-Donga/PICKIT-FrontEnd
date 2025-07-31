@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     marginLeft: 2,
     marginBottom: 5,
   },
-   feedbackTitlenext: {
+  feedbackTitlenext: {
     color: "#666",
     marginLeft: 8,
   },
@@ -187,7 +187,6 @@ const styles = StyleSheet.create({
     marginHorizontal: -8,
     marginBottom: 20,
   },
-  // 새로운 가로 스크롤 카테고리 스타일
   categoryScrollView: {
     marginBottom: 20,
     height: 320,
@@ -230,12 +229,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     borderColor: "#000",
   },
+  // 최대값 태그 버튼 스타일 추가
+  maxCountTagButton: {
+    backgroundColor: "#000",
+    borderColor: "#000",
+  },
   tagText: {
     fontSize: 14,
     color: "#000",
     textAlign: "center",
   },
   selectedTagText: {
+    color: "#fff",
+  },
+  // 최대값 태그 텍스트 스타일 추가
+  maxCountTagText: {
     color: "#fff",
   },
   feedbackInputSection: {
@@ -261,7 +269,6 @@ const styles = StyleSheet.create({
     color: "#666",
     marginBottom: 16,
   },
-  // 기존 가로 스크롤 스타일
   quickOptionsScrollView: {
     marginBottom: 20,
   },
@@ -282,7 +289,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 13,
   },
-  // 개별 아이콘 스타일들
   serviceIcon: {
     width: 18,
     height: 18,
@@ -319,25 +325,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 6,
   },
-  // 기존 아이콘 스타일들 (하위 호환성을 위해 유지)
-  serviceicon: {
-    width: 18,
-    height: 18,
-    marginRight: 5,
-    marginTop: 5,
-  },
-  placeicon: {
-    width: 15,
-    height: 15,
-    marginRight: 5,
-    marginTop: 5,
-  },
-  contentsicon: {
-    width: 15,
-    height: 15,
-    marginRight: 5,
-    marginTop: 5,
-  },
   quickOptionTitle: {
     fontSize: 16,
     fontWeight: "bold",
@@ -367,6 +354,43 @@ const styles = StyleSheet.create({
   },
   selectedQuickOptionText: {
     color: "#ffffff",
+  },
+  // 선택된 옵션들 표시 관련 스타일
+  selectedOptionsSection: {
+    marginBottom: 16,
+  },
+  showSelectedButton: {
+    backgroundColor: "#f0f0f0",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 16,
+    alignSelf: "flex-start",
+    marginBottom: 8,
+  },
+  showSelectedButtonText: {
+    fontSize: 14,
+    color: "#333",
+    fontWeight: "bold",
+  },
+  selectedOptionsContainer: {
+    marginBottom: 8,
+    maxHeight: 40,
+  },
+  // 선택된 옵션 컨테이너 콘텐츠 스타일 추가
+  selectedOptionsContentContainer: {
+    alignItems: "center",
+    paddingRight: 16,
+  },
+  selectedOptionTag: {
+    backgroundColor: "#000",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    marginRight: 8,
+  },
+  selectedOptionTagText: {
+    color: "#fff",
+    fontSize: 12,
   },
   textInput: {
     borderWidth: 1,
@@ -463,9 +487,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   reviewTags: {
+    flex: 1,
+    marginRight: 8,
+  },
+  // 리뷰 태그 스크롤뷰 스타일 추가
+  reviewTagsScrollView: {
+    maxHeight: 30,
+  },
+  reviewTagsContentContainer: {
     flexDirection: "row",
     alignItems: "center",
-    flex: 1,
+    paddingRight: 16,
   },
   reviewTag: {
     backgroundColor: "#f5f5f5",
@@ -477,6 +509,19 @@ const styles = StyleSheet.create({
   reviewTagText: {
     fontSize: 11,
     color: "#666",
+  },
+  // 더 많은 태그 버튼 스타일 추가
+  moreTagsButton: {
+    backgroundColor: "#e0e0e0",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginRight: 8,
+  },
+  moreTagsText: {
+    fontSize: 11,
+    color: "#666",
+    fontWeight: "bold",
   },
   likesCount: {
     fontSize: 12,
@@ -504,6 +549,72 @@ const styles = StyleSheet.create({
     backgroundColor: "#d0d0d0",
     marginHorizontal: 8,
     marginTop: 25,
+  },
+  // 모달 관련 스타일
+  modalContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  closeButton: {
+    fontSize: 16,
+    color: "#ff4444",
+  },
+  // 모달 콘텐츠 스타일 수정 - 상단 여백 추가
+  modalContent: {
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingTop: 20, // 상단 여백 추가
+  },
+  // 댓글 수정 관련 스타일
+  editInput: {
+    borderWidth: 1,
+    borderColor: "#e0e0e0",
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 14,
+    color: "#333",
+    marginBottom: 8,
+    minHeight: 80,
+    textAlignVertical: "top",
+  },
+  editButtons: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginBottom: 12,
+  },
+  cancelButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    marginRight: 8,
+  },
+  cancelButtonText: {
+    color: "#666",
+    fontSize: 14,
+  },
+  saveButton: {
+    backgroundColor: "#ff4444",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 6,
+  },
+  saveButtonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "bold",
   },
 })
 
