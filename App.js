@@ -74,14 +74,14 @@ const App = () => {
     {
       id: "service",
       title: "서비스",
-      icon: require("./src/service.png"),
+      icon: require("./src/detailpagesrc/serviceicon.png"),
       iconStyle: "serviceIcon",
       options: ["안내가 명확해요", "직원이 친절해요", "예약이 편해요", "대기 시간이 짧아요"],
     },
     {
       id: "space",
       title: "공간 및 환경",
-      icon: require("./src/place.png"),
+      icon: require("./src/detailpagesrc/placeicon.png"),
       iconStyle: "placeIcon",
       options: ["매장이 깨끗해요", "분위기가 예뻐요", "접근성이 좋아요", "대기 공간이 넓어요"],
     },
@@ -95,7 +95,7 @@ const App = () => {
     {
       id: "waiting",
       title: "대기 현황",
-      icon: require("./src/wait.png"),
+      icon: require("./src/detailpagesrc/waitingicon.png"),
       iconStyle: "waitIcon",
       options: ["대기 없음", "짧은 대기", "보통 대기", "긴 대기"],
     },
@@ -333,7 +333,7 @@ const App = () => {
         <View style={styles.headerIcons}>
           <TouchableOpacity style={styles.headerIcon} onPress={toggleHeart}>
             <Image
-              source={require("./src/heart.png")}
+              source={require("./src/common/favorites.png")}
               style={[styles.heart, { tintColor: isHeartLiked ? "#ff4444" : "#666" }]}
               resizeMode="cover"
             />
@@ -361,7 +361,7 @@ const App = () => {
           </View>
 
           <View style={styles.infoRow}>
-            <Image source={require("./src/time.png")} style={styles.timeicon} resizeMode="cover" />
+            <Image source={require("./src/detailpagesrc/timeicon.png")} style={styles.timeicon} resizeMode="cover" />
             <Text style={styles.infoText}>월~일 : 11:00 - 21:00</Text>
           </View>
 
@@ -490,7 +490,7 @@ const App = () => {
             />
 
             <TouchableOpacity style={styles.submitButton}>
-              <Image source={require("./src/write.png")} style={styles.writeicon} resizeMode="cover" />
+              <Image source={require("./src/detailpagesrc/writeicon.png")} style={styles.writeicon} resizeMode="cover" />
               <Text style={styles.submitButtonText}>반응 쓰기</Text>
             </TouchableOpacity>
           </View>
@@ -500,7 +500,7 @@ const App = () => {
         <View style={styles.section}>
           <View style={styles.reviewsHeader}>
             <Text style={styles.reviewsTitle}>반응 42</Text>
-            <Image source={require("./src/back2.png")} style={styles.back2icon} resizeMode="cover" />
+            <Image source={require("./src/detailpagesrc/wholereview.png")} style={styles.back2icon} resizeMode="cover" />
           </View>
 
           {reviews.map((review) => (
@@ -508,7 +508,7 @@ const App = () => {
               <View style={styles.reviewHeader}>
                 <View style={styles.reviewAuthor}>
                   <View style={styles.avatar}>
-                    <Image source={require("./src/profile.png")} style={styles.profileicon} resizeMode="cover" />
+                    <Image source={require("./src/detailpagesrc/profileicon.png")} style={styles.profileicon} resizeMode="cover" />
                   </View>
                   <Text style={styles.authorName}>{review.author}</Text>
                 </View>
@@ -534,7 +534,7 @@ const App = () => {
           ))}
 
           <TouchableOpacity style={styles.viewAllButton}>
-            <Image source={require("./src/wholereact.png")} style={styles.wholereact} resizeMode="cover" />
+            <Image source={require("./src/detailpagesrc/wholereact.png")} style={styles.wholereact} resizeMode="cover" />
           </TouchableOpacity>
         </View>
       </ScrollView>
