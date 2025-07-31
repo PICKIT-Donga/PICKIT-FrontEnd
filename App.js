@@ -88,7 +88,7 @@ const App = () => {
     {
       id: "content",
       title: "상품 및 콘텐츠",
-      icon: require("./src/contents.png"),
+      icon: require("./src/detailpagesrc/contentsicon.png"),
       iconStyle: "contentsIcon",
       options: ["상품이 다양해요", "퀄리티가 좋아요", "가격이 합리적이에요", "굿즈가 예뻐요"],
     },
@@ -102,14 +102,14 @@ const App = () => {
     {
       id: "stock",
       title: "재고 상황",
-      icon: require("./src/group.png"),
+      icon: require("./src/detailpagesrc/goodsicon.png"),
       iconStyle: "stockIcon",
       options: ["재고 충분", "일부 품절", "거의 매진", "완전 매진"],
     },
     {
       id: "crowd",
       title: "혼잡도",
-      icon: require("./src/people.png"),
+      icon: require("./src/detailpagesrc/peopleicon.png"),
       iconStyle: "crowdIcon",
       options: ["여유로움", "약간 붐빔", "매우 붐빔", "입장 제한"],
     },
@@ -328,7 +328,7 @@ const App = () => {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity>
-          <Image source={require("./src/back.png")} style={styles.back} resizeMode="cover" />
+          <Image source={require("./src/detailpagesrc/backicon.png")} style={styles.back} resizeMode="cover" />
         </TouchableOpacity>
         <View style={styles.headerIcons}>
           <TouchableOpacity style={styles.headerIcon} onPress={toggleHeart}>
@@ -339,7 +339,7 @@ const App = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.headerIcon}>
-            <Image source={require("./src/search.png")} style={styles.search} resizeMode="cover" />
+            <Image source={require("./src/common/searchicon.png")} style={styles.search} resizeMode="cover" />
           </TouchableOpacity>
         </View>
       </View>
@@ -356,7 +356,7 @@ const App = () => {
           <Text style={styles.eventDate}>25.05.30 - 25.07.27</Text>
 
           <View style={styles.infoRow}>
-            <Image source={require("./src/pin.png")} style={styles.pin} resizeMode="cover" />
+            <Image source={require("./src/common/pickitpin.png")} style={styles.pin} resizeMode="cover" />
             <Text style={styles.infoText}>서울 마포구 와우산로35길 13 오브젝트 서교</Text>
           </View>
 
@@ -421,7 +421,7 @@ const App = () => {
         {/* Feedback Section */}
         <View style={styles.section}>
           <View style={styles.feedbackHeader}>
-            <Image source={require("./src/pin.png")} style={styles.locationicon} resizeMode="cover" />
+            <Image source={require("./src/common/pickitpin.png")} style={styles.locationicon} resizeMode="cover" />
             <Text style={styles.feedbackTitle}>현장 어때요?</Text>
             <Text style={styles.feedbackTitlenext}>(오전 9시 기준)</Text>
           </View>
@@ -465,7 +465,7 @@ const App = () => {
           <View style={styles.feedbackInputSection}>
             <View style={styles.feedback_wicon}>
               <Text style={styles.feedbackInputTitle}>지금 여기 어땠나요?</Text>
-              <Image source={require("./src/essential.png")} style={styles.essentialicon} resizeMode="cover" />
+              <Image source={require("./src/detailpagesrc/essentialicon.png")} style={styles.essentialicon} resizeMode="cover" />
             </View>
             <Text style={styles.feedbackInputSubtitle}>
               직접 느낀 좋은 점을 선택해보세요. 우선 한 마디가 큰 정보가 돼요!
@@ -513,7 +513,7 @@ const App = () => {
                   <Text style={styles.authorName}>{review.author}</Text>
                 </View>
                 <TouchableOpacity>
-                  <Image source={require("./src/more.png")} style={styles.moreicon} resizeMode="cover" />
+                  <Image source={require("./src/detailpagesrc/moreicon.png")} style={styles.moreicon} resizeMode="cover" />
                 </TouchableOpacity>
               </View>
 
