@@ -1125,6 +1125,10 @@ PODS:
     - React
   - RNCPicker (2.11.1):
     - React-Core
+  - RNGestureHandler (2.27.2):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
   - RNScreens (3.34.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1218,6 +1222,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -1347,6 +1352,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
@@ -1422,6 +1429,7 @@ SPEC CHECKSUMS:
   ReactCommon: 3dc453f427d2f3d7f2c71499d191b456f83c59bd
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNCPicker: 55f4c211f69edb5c7a0faf85933e36c3621ebf64
+  RNGestureHandler: 003ab469e084a0d41ec243051f84cf8d81fec3f2
   RNScreens: 29418ceffb585b8f0ebd363de304288c3dce8323
   RNSVG: 9325fbf920447630ab816ace9a4dfd9e4fe8c1b9
   RNVectorIcons: 48c158e45647a2072579db62f704c09b1dd4ca0f
