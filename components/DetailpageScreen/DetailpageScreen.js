@@ -852,7 +852,7 @@ const DetailpageScreen = () => {
 
               <View style={styles.reviewFooter}>
                 <View style={styles.reviewTags}>{renderReviewTags(review.tags)}</View>
-                <Text style={styles.reviewDate}>{review.date} 방문</Text>
+                <Text style={styles.reviewDate}>{review.date} 작성</Text>
               </View>
             </View>
           ))}
