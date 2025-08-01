@@ -126,12 +126,6 @@ const styles = StyleSheet.create({
   introductionScrollView: {
     flex: 1,
   },
-  joinText: {
-    fontSize: 14,
-    color: "#333",
-    marginBottom: 8,
-    fontWeight: "bold",
-  },
   descriptionText: {
     fontSize: 14,
     color: "#666",
