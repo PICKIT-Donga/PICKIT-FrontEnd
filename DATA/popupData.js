@@ -22,7 +22,7 @@ export const popupData = [
     endDate: "2025-11-09",
     image: require("../src/homesrc/poster1.png"),
     category: "exhibition",
-    description: "톰 삭스의 우주 탐험을 주제로 한 혁신적인 전시입니다.",
+    description: "톰 삭스의 우주 탐험을 주제로 한 혁신적인 전시.",
     operatingHours: "월~일 : 11:00 - 20:00",
     tags: ["현대미술", "우주", "체험", "인터랙티브"],
     region: "seoul",
