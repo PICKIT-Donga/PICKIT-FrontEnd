@@ -836,7 +836,7 @@ const DetailpageScreen = () => {
               />
             </View>
             <Text style={styles.feedbackInputSubtitle}>
-              직접 느낀 좋은 점을 선택해보세요. 우선 한 마디가 큰 정보가 돼요!
+              직접 느낀 좋은 점을 선택해보세요. 유저 한 마디가 큰 정보가 돼요!
             </Text>
 
             {/* 퀵 옵션 섹션 */}
